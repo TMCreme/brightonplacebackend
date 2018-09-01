@@ -25,7 +25,7 @@ SECRET_KEY = '%kn*hytw!ta295w_5a*kwr)$vlk0)26y9nmw9%)-06tnr@1d&)'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['brightonplace.herokuapp.com']
 
 LOGIN_REDIRECT_URL = '/home/edit_profile/'
 LOGIN_URL = '/home/'
@@ -125,15 +125,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, "static/")
-
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
 
 MEDIA_URL = '/media/'
 
