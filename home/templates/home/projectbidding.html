@@ -1,0 +1,85 @@
+{% extends 'home/basic.html' %}
+
+
+{% block body %}
+{% load crispy_forms_tags %}
+{% load widget_tweaks %}
+
+
+
+<div class="col-12 col-md-3 col-2 bd-sidebar">
+      <a href="{% url 'home:profile' %}">Go to your dashboard</a>
+</div>
+
+<div class="container">
+    <div class="header mx-auto" style="width: 400px;">
+        <p>Fill in your bid information</p>
+    </div>
+    
+    <form method="post" class="mx-auto" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <div class="form-group row">
+            <label for="colFormLabel" class="col-sm-2 col-form-label">Reference</label>
+            <div class="col-sm-10">
+                {{ projectbid_form.bid_reference | add_class:"css_class" | attr:"placeholder:Reference" }}
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="colFormLabel" class="col-sm-2 col-form-label">Commission</label>
+            <div class="col-sm-10">
+                {{ projectbid_form.commission | add_class:"css_class" | attr:"placeholder:Commission" }}
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="colFormLabel" class="col-sm-2 col-form-label">Total Cost</label>
+            <div class="col-sm-10">
+                {{ projectbid_form.total_cost | add_class:"css_class" | attr:"placeholder:Total Cost" }}
+            </div>
+        </div>
+        
+        
+        
+        <div class="col-sm-12 mx-auto" style="width: 50px; margin-bottom: 50px;">
+            <div class="col-md-12">
+                <hr>
+                <div class="card-actionbar-row">
+                    <input type="submit" class="btn btn-flat btn-primary ink-reaction" value="SUBMIT">
+                </div>
+            </div>
+        </div>
+        
+    </form>
+</div>
+
+
+
+
+
+<!--div class="container">
+    <form method="post">
+        {% csrf_token %}
+        {{ projectbid_form.as_p }}
+       
+        <input type="submit" value="Submit">
+    </form>
+</div-->
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,104 @@
+{% extends 'home/basic.html' %}
+
+
+{% block body %}
+{% load static %}
+{% load widget_tweaks %}
+
+<div class="col-12 col-md-3 col-2 bd-sidebar">
+      <a href="{% url 'home:profile' %}">Go to your dashboard</a>
+</div>
+
+<div class="container" style="height: ; margin: 30px; 40px; 20px;" >
+    
+    <div class="row">
+        <div class="col-xs-6" style="margin-right: 30px;">
+            {% if resulted_user_profile.profile_picture %}
+                <img src="/home{{ resulted_user_profile.profile_picture.url }}" class="userprofile img-responsive" style="border-radius: 50%; width: 122px; height: 122px;" onerror="{% static 'home/no_image.png' %}">
+            {% else %}
+                <img src="{% static 'home/no_image.png' %}" class="userprofile img-responsive" style="border-radius: 50%; width: 122px; height: 122px;">
+            {% endif %}
+        </div>
+        <div class="col-xs-6" style="margin-right: 30px;">
+            <p>{{ resulted_user.first_name }} {{ resulted_user.last_name }}</p>
+            <p>{{ resulted_user_profile.occupation }} </p>
+            
+        </div>
+
+        <div class="col-xs-6" style="margin-right: 60px;">
+           
+        </div>
+    </div>
+</div>
+
+
+<div class="container">
+    <div class="row user_profile_navbar" style="background-color: #2c2c54;">
+        <div class="col-sm-3">
+            <a href="#packages" id="packages"><div class="header" style="background-color: #d1ccc0;">Packages</div></a>
+        </div>
+        <div class="col-sm-3">
+            <a href="javascript:void(0)"><div class="header description" style="background-color: #2c2c54;">Description</div></a>
+        </div>
+        <div class="col-sm-3">
+            <a href="#workportfolio" id="sample"><div class="header" style="background-color: #2c2c54;">Work Portfolio</div></a>            
+        </div>
+        <div class="col-sm-3">
+            <a href="#"><div class="header" style="background-color: #2c2c54;">Reviews</div></a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6" style="margin-right: 30px;">
+                <img src="{% static 'home/no_image.png' %}" class="img-responsive" onerror="{% static 'home/no_image.png' %}" style="margin: 15px 15px 15px 15px;">           
+        </div>
+    </div>
+    <a name="#packages">Packages</a>
+    <div class="row" style="margin: 0px 30px 30px 0px;">
+        {% for projs in service_package %}
+        <div class="col">
+            <div class="header">
+                <li class="nav-item" style="list-style: none">
+                    <a class="nav-link" href="#" id="{{ projs.name }}">{{ projs.name }}</a>
+                </li>
+            </div>
+            <div class="card" style="color: #30336b">
+                <p>{{ projs.description }}</p>
+                {% for det in projs.get_detail_list %}
+                <p>{{ det}}</p>
+                {% endfor %}
+                <a href="{% url 'home:sendmessage' resulted_user.id %}" class="btn btn-primary">Continue (GH{{ projs.cost }})</a>               
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <a name="#workportfolio">Work Portfolio</a>
+    <div class="row">
+        
+        {% for services in resulted_user_service %}
+        <div class="col">
+            <div class="card" style="color: #30336b">
+                <p>{{ services.title }}</p>
+                <p>{{ services.client.username }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!--
+
+<div class="container">
+    {{ resulted_user.username }}<br/>
+    {{ resulted_user.email }}<br/>
+    {{ resulted_user_profile.city }}<br/>
+    <a href="{% url 'home:sendmessage' resulted_user.id %}">Message</a>
+</div>
+    
+-->
+{% endblock %}
+
+
+
+
+
+

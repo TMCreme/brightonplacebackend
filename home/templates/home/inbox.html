@@ -1,0 +1,26 @@
+{% extends 'home/basic.html' %}
+
+
+
+{% block body %}
+
+
+<div class="container">
+    {% for mesage in mesages %}
+        <p>From: {{ mesage.fromUser }} {{ mesage.fromUser.last_name }}</p>
+        <p>Message: {{ mesage.message }}</p>
+        <p>To: {{ mesage.toUser }} {{ mesage.toUser.last_name }}</p>
+    {% endfor %}
+
+</div>
+
+
+
+
+
+
+{% endblock %}
+
+
+
+

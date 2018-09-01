@@ -1,0 +1,165 @@
+{% extends 'home/basic.html' %}
+
+
+{% block css %}
+<style>
+    .bidclass:hover{color: white; text-decoration: none;}
+    .bidding_form{display: none}
+    .project_class{display: none}
+    .reference_class{display: none}
+    .bidder_class{display: none}
+    .client_class{display: none}
+    .service_class{display: none}
+
+</style>
+{% endblock %}
+
+{% block body %}
+{% load static %}
+{% load widget_tweaks %} 
+
+
+<div class="col-12 col-md-3 col-2 bd-sidebar">
+      <a href="{% url 'home:profile' %}">Go to your dashboard</a>
+</div>
+
+
+
+<div class="container" style="margin: 30px; 40px; 20px;">
+    <div class="row">
+        <div class="col-xs-6" style="margin-right: 50px">
+            {% if posted_project.image %}
+                    <img class="img-fluid" src="/home{{ posted_project.image.url }}" style="width: 250px; height: 250px;">
+                {% else %}
+                    <img src="{% static 'home/no_image.png' %}" style="width: 250px; height: 250px;">
+                {% endif %}
+            <p>{{ posted_project.client }}</p>
+            <p>{{ posted_project.title }}</p>
+            <p>{{ posted_project.category }}</p>
+            <p>{{ posted_project.service }}</p>
+        </div>
+        <div class="col" >
+            <div class="col-xs-3" style="margin-left: 30px; float: right; ">
+                <h5><a href="javascript:void(0)" onclick="bidtoggle('bid_form')" style="font-size: 4vw; background-color: #5f27cd; color: white" class="bidclass">PLACE A BID </a></h5>
+            </div>
+        </div>
+        
+        
+    </div>
+     
+</div>
+<div class="container" >
+    <div class="row bidding_form" id="bid_form">
+            <form method="post" class="mx-auto" enctype="multipart/form-data">
+                {% csrf_token %}
+                
+                <div class="form-group row project_class">
+                    <label for="colFormLabel" class="col-sm-2 col-form-label">Project</label>
+                    <div class="col-sm-10">
+                        {{ projectbid_form.project | add_class:"css_class" | attr:"placeholder:Project" }}
+                    </div>
+                </div>
+                <div class="form-group row reference_class">
+                    <label for="colFormLabel" class="col-sm-2 col-form-label">Reference</label>
+                    <div class="col-sm-10">
+                        {{ projectbid_form.bid_reference | add_class:"css_class" | attr:"placeholder:Reference" }}
+                    </div>
+                </div>
+                <div class="form-group row bidder_class">
+                    <label for="colFormLabel" class="col-sm-2 col-form-label">Bidder</label>
+                    <div class="col-sm-10">
+                        {{ projectbid_form.bidder | add_class:"css_class" | attr:"placeholder:Bidder" }}
+                    </div>
+                </div>
+                <div class="form-group row client_class">
+                    <label for="colFormLabel" class="col-sm-2 col-form-label">Client</label>
+                    <div class="col-sm-10">
+                        {{ projectbid_form.client | add_class:"css_class" | attr:"placeholder:Client" }}
+                    </div>
+                </div>
+                <div class="form-group row service_class">
+                    <label for="colFormLabel" class="col-sm-2 col-form-label">Service</label>
+                    <div class="col-sm-10">
+                        {{ projectbid_form.service | add_class:"css_class" | attr:"placeholder:Service" }}
+                    </div>
+                </div>
+                
+                <div class="form-group row">
+                    <label for="colFormLabel" class="col-sm-2 col-form-label">Description</label>
+                    <div class="col-sm-10">
+                        {{ projectbid_form.description | add_class:"css_class" | attr:"placeholder:Description" }}
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="colFormLabel" class="col-sm-2 col-form-label">Cost</label>
+                    <div class="col-sm-10" id="provider_cost">
+                        {{ projectbid_form.cost | add_class:"css_class" | attr:"placeholder:Cost" }}
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="colFormLabel" class="col-sm-2 col-form-label">Commission</label>
+                    <div class="col-sm-10" id="brighton_commission">
+                        {{ projectbid_form.commission | add_class:"css_class" | attr:"placeholder:Commission" }}
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="colFormLabel" class="col-sm-2 col-form-label">Total Cost</label>
+                    <div class="col-sm-10" id="client_total">
+                        {{ projectbid_form.total_cost | add_class:"css_class" | attr:"placeholder:Total Cost" }}
+                    </div>
+                </div>
+
+                <div class="col-sm-12 mx-auto" style="width: 50px; margin-bottom: 50px;">
+                    <div class="col-md-12">
+                        <hr>
+                        <div class="card-actionbar-row">
+                            <input type="submit" class="btn btn-flat btn-primary ink-reaction" value="SUBMIT">
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+</div>
+
+
+<script>
+    function bidtoggle(form_id){
+        $("#"+form_id).toggle();
+    }
+</script>
+<script>
+    $("#id_cost").on('change', function () {
+        
+        $("#id_commission").val($(this).val()*0.2);
+        var b = parseFloat($(this).val()*0.2);
+        $("#id_total_cost").val(parseFloat($(this).val())+parseFloat($(this).val()*0.2));
+});
+    
+</script>
+
+
+
+
+
+
+
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+

@@ -1,0 +1,41 @@
+{% extends 'home/basic.html' %}
+
+{% block body %}
+{% load static %}
+{% load widget_tweaks %}
+
+
+<div class="col-12 col-md-3 col-2 bd-sidebar">
+      <a href="{% url 'home:profile' %}">Go to your dashboard</a>
+</div>
+
+<div class="container" style="margin: 20px 50px;">
+    <div class="row">
+        {% for name in my_user %}
+        <div class="col-sm-6 col-sm-3">
+            <a href="{% url 'home:postedproject' name.id %}">
+                {% if name.image %}
+                    <img src="/home{{ name.image.url }}" style="width: 250px; height: 250px;">
+                {% else %}
+                    <img src="{% static 'home/no_image.png' %}" style="width: 250px; height: 250px;">
+                {% endif %}
+                <p>{{ name.title }}</p>
+                <p>{{ name.service }}</p>
+            </a>
+        </div>
+     {% endfor  %}
+    </div>
+</div>
+
+
+
+
+
+
+
+{% endblock %}
+
+
+
+
+

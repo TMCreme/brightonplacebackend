@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="x-ua-compatible" content="ie-edge">
+        {% load staticfiles %}
+        {% load widget_tweaks %}
+        {% load crispy_forms_tags %}
+        <title>BRIGHTON PLACE: YOUR NUMBER ONE STOP SHOP FOR ALL SERVICES</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        
+        <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link type="text/css" rel="stylesheet" href="{% static 'home/main.css' %}">
+       
+        <script src="{% static 'home/mainjs.js' %}"></script>
+        {% block css %}
+        {% endblock %}
+        
+        <style>
+            a {text-decoration: none;}
+            a:hover{text-decoration: none; }
+        </style>
+        
+        
+    </head>
+    
+    
+    <body>
+        <!--Menubar begins here-->
+     
+        
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">Brighton</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'home:index' %}">Home <span class="sr-only">(current)</span></a>
+                  </li>
+                    <li class="nav-item">
+						{% if user.is_authenticated %}
+							<a class="nav-link" href="{% url 'home:logout' %}">Logout</a>
+				        {% else %}
+							<a class="nav-link" href="javascript:void(0)" onclick="document.getElementById('id01').style.display='block'">Login</a>
+				        {% endif %}
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Category
+                        </a>
+                        <ul class="dropdown-menu">
+                            {% for nam in catt %}
+                            <li class="dropdown-submenu">
+                                <a  class="dropdown-item" tabindex="-1" href="{% url 'home:servicecategory' nam.slug %}">{{ nam.name }}</a>
+                                <ul class="dropdown-menu">
+                                    {% for servv in servcc %}
+                                        {% if servv.servicecategory.name == nam.name %}
+                                            <li class="dropdown-item"><a href="{% url 'home:service_result_page' servv.slug %}">{{ servv.name }}</a></li>
+                                    
+                                       {% endif %}
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                        
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'home:signup' %}">Join</a>
+                    </li>
+                    <li class="nav-item" style="background-color: #82ccdd;">
+                        <a class="nav-link" href="{% url 'home:postproject' %}">Post a Project</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'home:postprojectlist' %}">Browse Projects</a>
+                    </li>
+                    
+                </ul>
+                <form class="form-inline my-2 my-lg-0" action="{% url 'home:search_results' %}" method="GET">{% csrf_token %}
+                    <input name="q" value="{{ request.GET.q }}" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+              </div>
+            </nav>
+  
+        <!--Menubar ends here-->
+        
+        
+        
+        <!--Message notifiction system for user action feedbacks-->
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                        {{ message}}
+                    </p>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        <!--End of message notification for user action feedback-->
+        
+        
+        {% block body %}
+        
+        {% endblock %}
+        
+        
+  
+            <!--Footer-->
+        <!-- Footer -->
+        <footer class="page-footer font-small unique-color-dark">
+            <div style="background-color: #079992;">
+                <div class="container">
+                    <!-- Grid row-->
+                    <div class="row py-4 d-flex align-items-center">
+                        <!-- Grid column -->
+                        <div class="col-md-6 col-lg-5 text-center text-md-left mb-4 mb-md-0">
+                            <h6 class="mb-0">Get connected with us on social networks!</h6>
+                        </div>
+                        <!-- Grid column -->
+
+                        <!-- Grid column -->
+                        <div class="col-md-6 col-lg-7 text-center text-md-right">
+                            <!-- Facebook -->
+                            <a class="fb-ic" href="#">
+                                <i class="fa fa-facebook white-text mr-4"> </i>
+                            </a>
+                            <!-- Twitter -->
+                            <a class="tw-ic">
+                                <i class="fa fa-twitter white-text mr-4"> </i>
+                            </a>
+                            <!-- Google +-->
+                            <a class="gplus-ic">
+                                <i class="fa fa-google-plus white-text mr-4"> </i>
+                            </a>
+                            <!--Linkedin -->
+                            <a class="li-ic">
+                                <i class="fa fa-linkedin white-text mr-4"> </i>
+                            </a>
+                            <!--Instagram-->
+                            <a class="ins-ic">
+                                <i class="fa fa-instagram white-text"> </i>
+                            </a>
+
+                        </div>
+                        <!-- Grid column -->
+                    </div>
+                    <!-- Grid row-->
+                </div>
+            </div>
+
+            <!-- Footer Links -->
+            <div class="container text-center text-md-left mt-5">
+
+                <!-- Grid row -->
+                <div class="row mt-3">
+
+                    <!-- Grid column -->
+                    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+
+                        <!-- Content -->
+                        <h6 class="text-uppercase font-weight-bold">Brighton</h6>
+                        <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                        <p>Bridging the gap between customers and service providers. Find the service you need and get a professional delivery anywhere in the world.</p>
+
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+
+                    <!-- Links -->
+                        <h6 class="text-uppercase font-weight-bold">Top Categories</h6>
+                        <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                            <p>
+                                <a href="#!">Graphic Design</a>
+                            </p>
+                            <p>
+                                <a href="#!">Programming and Tech</a>
+                            </p>
+                            <p>
+                                <a href="#!">Tutoring</a>
+                            </p>
+                            <p>
+                                <a href="#!">Web Design</a>
+                            </p>
+
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                        <!-- Links -->
+                        <h6 class="text-uppercase font-weight-bold">Useful links</h6>
+                        <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                        <p><a href="#">Your Account</a></p>
+                        <p><a href="#">Join</a></p>
+                        <p><a href="#">Privacy Policy</a></p>
+                        <p><a href="#">Terms and Conditions</a></p>
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+
+                        <!-- Links -->
+                        <h6 class="text-uppercase font-weight-bold">Contact</h6>
+                        <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                        <p><i class="fa fa-home mr-3"></i> Accra, Ghana</p>
+                        <p><i class="fa fa-envelope mr-3"></i> brightonplace18@gmail.com</p>
+                        <p><i class="fa fa-phone mr-3"></i> +233 242118429</p>
+                        <p><i class="fa fa-print mr-3"></i> +233 266378169</p>
+
+                    </div>
+                    <!-- Grid column -->
+
+                </div>
+                <!-- Grid row -->
+
+            </div>
+            <!-- Footer Links -->
+
+            <!-- Copyright -->
+            <div class="footer-copyright text-center py-3">© 2018 Copyright:
+                <a href="#"> Brighton</a>
+            </div>
+    <!-- Copyright -->
+
+  </footer>
+        <!-- Footer -->
+        
+         <!--Login Form-->
+        <div class="modal" id="id01">
+            <span onclick="document.getElementById('id01').style.display = 'none' " class="close" title="Close Login Window">&times;</span>
+                <form method="POST" action="" class="modal-content animate">{% csrf_token %}
+                    <div class="imgcontainer">
+                        <img src="{% static 'home/no_image.png' %}" width="90px" height="100px"/>
+                    </div>
+                    
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-12 align-center">                                
+                                <div class="form-group floating-label">
+                                    {{ user_login_form.username | add_class:"css_class" | attr:"placeholder:Username" }}
+                                    <label for="regular2">Username</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 align-center">
+                                <div class="form-group floating-label">
+                                    {{ user_login_form.password | add_class:"css_class" | attr:"placeholder:Password" }}
+                                    <label for="regular2">Password</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 align-center">
+                                <div class="col-md-12">
+                                    <hr>
+                                    <div class="card-actionbar-row">
+                                        <input type="submit" class="btn btn-flat btn-primary ink-reaction" value="SUBMIT">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>        
+        </div>
+      
+        
+        <script>
+            $(document).ready(function(){
+                $('.success').delay(500).fadeIn('normal', function() {
+                  $(this).delay(2500).fadeOut();
+                });
+            })
+        </script>
+   
+        
+        <script>
+            var modal = document.getElementById("id01");
+            
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+        </script>
+        
+        <script>
+            function myFunction() {
+                var x = document.getElementById("myTopnav");
+                if (x.className === "navbar") {
+                    x.className += " responsive";
+                } else {
+                    x.className = "navbar";
+                }
+            }
+            </script>
+        
+        <script>
+            document.formHasErrors = {% if form.errors %}true{% else %}false{% endif %};
+            {{ form.errors }}
+        </script>
+        
+        <script>
+            $( document ).ready(function() {
+               if (document.formHasErrors) {
+                   $('#id01').modal('toggle');
+               }
+            });
+        </script>
+        
+            
+            <script>
+                var slideIndex = 0;
+                carousel();
+
+                function carousel() {
+                    var i;
+                    var x = document.getElementsByClassName("mySlides");
+                    for (i = 0; i < x.length; i++) {
+                        x[i].style.display = "none";
+                    }
+                    slideIndex++;
+                    if (slideIndex > x.length) {slideIndex = 1}
+                    x[slideIndex-1].style.display = "block";
+                    setTimeout(carousel, 5000);
+                }
+
+            </script>
+       
+            {% block extra_js %}
+            {% endblock %}
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+   
+            
+    </body>
+    
+    
+    
+    
+    
+</html>

@@ -1,0 +1,38 @@
+{% extends 'home/basic.html' %}
+
+
+{% block body %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+{% load widget_tweaks %}
+
+
+
+
+<div class="container text-uppercase font-weight-bold">
+    <p>{{ slug }}</p>
+</div>
+
+
+<div class="col-12 col-md-3 col-2 bd-sidebar">
+      <a href="{% url 'home:profile' %}">Go to your dashboard</a>
+</div>
+
+
+<div class="container">    
+    <div class="row">
+        {% for objects in sercatlist %}
+        <div class="border border-light col-6 col-sm-3" style="margin: 10px 5px 10px 15px;">
+            <a href="{% url 'home:service_result_page' objects.slug %}"><img style="width: 240px; height: 200px" src="/home{{ objects.sample_image.url }}" class="circle img-fluid" onerror="this.src='{% static 'home/no_image.png' %}'"></a>
+            
+            <p>{{ objects.name }}</p>
+    </div>
+      {% endfor %}
+   
+</div>
+
+{% endblock %}
+
+
+
+

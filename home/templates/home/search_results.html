@@ -1,0 +1,52 @@
+{% extends 'home/basic.html' %}
+
+{% block body %}
+{% load static %}
+{% load widget_tweaks %}
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            {% for result in results %}
+            <li>{{ result }}</li>
+            {% endfor %}
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+

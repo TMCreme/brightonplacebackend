@@ -1,0 +1,53 @@
+{% extends 'home/basic.html' %}
+
+
+{% block body %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+{% load widget_tweaks %}
+
+
+<div class="col-12 col-md-3 col-2 bd-sidebar">
+      <a href="{% url 'home:profile' %}">Go to your dashboard</a>
+</div>
+
+
+{% if not servicepage %}
+<div class="container">
+    
+    <p>No service providers registered under this category</p>
+</div>
+{% else %}
+<div class="container align-self-center">
+    
+    <p>List of service Providers and their portfolios under <i class="text-uppercase font-weight-bold">{{ slug }}</i></p>
+</div>
+
+<!--Search results will go here-->
+<div class="col-12 col-md-3 col-2 bd-sidebar">
+    <p>Hey</p>
+</div>
+<!--End of the search results-->
+
+<!--Display of the services in a grid layout-->
+<div class="container">    
+    <div class="row">
+        {% for sampserv in servicepage %}
+        <div class="border border-light col-6 col-md-3" style="margin: 10px 5px 10px 15px;">
+            <a href="{% url 'home:userdashboard' sampserv.user.user.id %}"><img src="/home{{ sampserv.sample_image.url }}" class="img-thumbnal img-fluid" ></a>
+            <p>Category: {{ sampserv.servicecategory.name }}</p>
+            <p>{{ sampserv.service.name }}</p>
+            <p>{{ sampserv.user.username }}</p>
+    </div>
+      {% endfor %}
+   
+</div>
+
+{% endif %}
+<!--End of the display of the services-->
+
+
+
+{% endblock %} 
+
+

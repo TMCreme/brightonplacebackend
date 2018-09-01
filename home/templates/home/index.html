@@ -1,0 +1,106 @@
+{% extends 'home/basic.html' %}
+
+{% load staticfiles %}
+{% load widget_tweaks %}
+
+
+{% block body %}
+
+    <!--Sliders begins here-->
+        <div class="content">
+            <div class="mySlides" style="background-color: violet; height: 500px;">
+                <!--p class="textscroll" style="">YOUR NUMBER ONE CENTER FOR SERVICES</p-->
+                <div class="" >
+                    <img class="img-fluid img-responsive" style="width: 100%; height: 500px;" src="{% static 'home/fashioning2.jpg' %}" alt="THE MARKETER"/>
+                    <p class="text-justify" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%)">YOUR NUMBER ONE CENTER FOR SERVICES</p>
+                </div>
+            </div>
+
+            <div class="mySlides" style="background-color: violet; height: 500px;">
+                <div class="">
+                    <img class="img-fluid img-responsive" style="width: 100%; height: 500px;" src="{% static 'home/programming.jpg' %}" alt="THE MARKETER"/>
+                    <p class="text-justify" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%)">YOUR NUMBER ONE CENTER FOR SERVICES</p>
+                    
+                </div>
+                
+            </div>
+            <div class="mySlides" style="background-color: violet; height: 500px;">
+                <div class="">
+                    <img class="img-fluid img-responsive" style="width: 100%; height: 500px;" src="{% static 'home/tutoring.jpg' %}" alt="THE MARKETER"/>
+                    <p class="text-justify" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%)">YOUR NUMBER ONE CENTER FOR SERVICES</p>
+                    
+                </div>
+                
+            </div>
+            
+        </div>
+        <!--Sliders ends here-->
+        
+        <!--Quick summary info-->
+        <div>
+            <h2>Do you need a quick job done?</h2>
+            <ul>
+                <li>Just post a project and receive professional bids from various service providers.</li>
+                <li>Whatever your needs are, from IT technical issues, fashion design, graphic design, etc, there is always service provider to make it happen.</li>
+            </ul>
+            <h2>What's great about it?</h2>
+            <ul>
+                
+                <li>You only get to make payment when job is completed and you are 100% satisfied.</li>
+                <li>You also get a refund if the product or service is not delivered according to specifications.</li>
+                
+                <li>You only get to make payment when job is completed and you are 100% satisfied.</li>
+                <li>You also get a refund if the product or service is not delivered according to specifications.</li>
+                
+                <li>You only get to make payment when job is completed and you are 100% satisfied.</li>
+                <li>You also get a refund if the product or service is not delivered according to specifications.</li>
+                
+                
+                <li>You only get to make payment when job is completed and you are 100% satisfied.</li>
+                <li>You also get a refund if the product or service is not delivered according to specifications.</li>
+                
+                <li>You only get to make payment when job is completed and you are 100% satisfied.</li>
+                <li>You also get a refund if the product or service is not delivered according to specifications.</li>
+            </ul>
+        </div><br/>
+        
+        <!--Testing the modal login window-->
+        {% if user.is_authenticated %}
+        <p>Welcome {{ user.username }}</p>
+        {% endif %}
+        
+        
+        <!--End of summary info-->
+        
+    <!--List of the various categories goes here too-->
+        <div class="container">
+            <div class="row">
+                {% for item in catt %}
+                    <div class="col-6 col-sm-3" style="margin: 10px 5px 10px 15px;">
+                        <a href="{% url 'home:servicecategory' item.slug %}"><img class="img-responsive img-fluid" style="border-radius: 50%;" src="/home{{ item.image.url }}" onerror="this.src='{% static 'home/no_image.png' %}'">
+                            <p class="centered" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%)">{{ item.name }}</p></a>
+                    </div>
+               
+                {% endfor %}
+            </div>
+        </div>
+            
+
+
+    <!--End of the list of services-->
+
+
+        
+        <!--Inhouse services-->
+        
+        <!--End of the Inhouse services-->
+        
+        
+       
+        
+        
+        
+        
+  
+{% endblock %}
+       

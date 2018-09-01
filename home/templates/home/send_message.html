@@ -1,0 +1,93 @@
+{% extends 'home/basic.html' %}
+
+{% block css %}
+<style>
+    #id_fromUser{display: none}
+    #id_toUser{display: none}
+</style>
+{% endblock %}
+
+
+{% block body %}
+{% load static %}
+{% load widget_tweaks %}
+
+
+
+<div class="col-12 col-md-3 col-2 bd-sidebar">
+      <a href="{% url 'home:profile' %}">Go to your dashboard</a>
+</div>
+
+
+<div class="container">
+    <div class="header mx-auto" style="width: 510px;">
+        <p>SEND THIS SERVICE PROVIDER YOUR REQUEST FOR A SERVICE</p>
+    </div>
+    
+    <form method="post" class="mx-auto" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <div class="form-group row">
+            <!--label for="colFormLabel" class="col-sm-2 col-form-label">From</label-->
+            <div class="col-sm-10">
+                {{ message_form.fromUser | add_class:"css_class" | attr:"placeholder:From:" }}
+            </div>
+        </div>
+        <div class="form-group row">
+            <!--label for="colFormLabel" class="col-sm-2 col-form-label">To</label-->
+            <div class="col-sm-10">
+                {{ message_form.toUser | add_class:"css_class" | attr:"placeholder:To" }}
+            </div>
+        </div>
+        
+        <div class="form-group row">
+            <label for="colFormLabel" class="col-sm-2 col-form-label">Subject</label>
+            <div class="col-sm-10">
+                {{ message_form.subject | add_class:"css_class" | attr:"placeholder:Subject" }}
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="colFormLabel" class="col-sm-2 col-form-label">Message</label>
+            <div class="col-lg">
+                {{ message_form.message | add_class:"css_class" | attr:"placeholder:Message" }}
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="colFormLabel" class="col-sm-2 col-form-label">Image</label>
+            <div class="col-sm-10">
+                {{ message_form.image | add_class:"css_class" | attr:"placeholder:Image" }}
+            </div>
+        </div>
+              
+        <div class="col-sm-12 mx-auto" style="width: 50px; margin-bottom: 50px;">
+            <div class="col-md-12">
+                <hr>
+                <div class="card-actionbar-row">
+                    <input type="submit" class="btn btn-flat btn-primary ink-reaction" value="SUBMIT">
+                </div>
+            </div>
+        </div>
+        
+        
+    </form>
+  
+    
+</div>
+<!--
+<div class="container">
+    <form method="post">
+        {% csrf_token %}
+        {{ message_form.as_p }}
+        <input type="submit" value="Send">
+    </form>
+</div>
+-->
+
+{% endblock %}
+
+
+
+
+
+
+

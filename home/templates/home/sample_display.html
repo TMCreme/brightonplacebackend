@@ -1,0 +1,21 @@
+{% extends 'home/basic.html' %}
+
+
+{% block body %}
+{% load crispy_forms_tags %}
+{% load widget_tweaks %}
+
+<div class="container">
+    <form method="post">
+        {% csrf_token %}
+        {{ sampleproject_form.as_p }}
+        <!--div class="form-group floating-label">
+            {{ sampleproject_form.user | add_class:'form-control'}}
+            <label for="regular2"></label>
+        </div-->
+        <input type="submit" value="Submit">
+    </form>
+</div>
+
+{% endblock %}
+

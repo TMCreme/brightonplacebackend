@@ -1,0 +1,132 @@
+{% extends 'home/basic.html' %}
+{% load crispy_forms_tags %}
+
+{% block css %}
+<style>
+    .message{display: none}
+</style>
+{% endblock %}
+
+{% block body %}
+{% load staticfiles %}
+
+<div class="container" style="height: ; margin: 30px; 40px; 20px;" >
+    
+    <div class="row">
+        <div class="col-xs-6" style="margin-right: 30px;">
+            {% if up.profile_picture %}
+                <img src="/home{{ up.profile_picture.url }}" class="userprofile img-responsive" style="border-radius: 50%; width: 122px; height: 122px;" onerror="{% static 'home/no_image.png' %}">
+            {% else %}
+                <img src="{% static 'home/no_image.png' %}" class="userprofile img-responsive" style="border-radius: 50%; width: 122px; height: 122px;">
+            {% endif %}
+        </div>
+        <div class="col-xs-6" style="margin-right: 30px;">
+            <p>{{ user.first_name }} {{ user.last_name }}</p>
+            <p>EMAIL: {{ user.email }}</p>
+            <p>Contact: {{ up.phone_number }}</p>
+            <p>{{ up.occupation }} @ {{ up.organization }}</p>
+            
+        </div>
+        <div class="col-xs-6" style="margin-right: 60px;">
+           <a href="{% url 'home:edit_profile' %}">Edit Profile</a><span class="glyphicon glyphicon-pencil"></span>
+        </div>
+        <div class="col-xs-6" style="margin-right: 60px;">
+           
+        </div>
+    </div>
+</div>
+
+
+<div class="container">
+    <div class="row user_profile_navbar" style="background-color: #2c2c54;">
+        <div class="col-sm-3">
+            <a href="javascript:void(0)" id="sample"><div class="header" style="background-color: #d1ccc0;">Sample</div></a>            
+        </div>
+        <div class="col-sm-3">
+            <a href="javasscript:void(0)" onclick="messagetoggle()" id="message"><div class="header" style="background-color: #2c2c54;">Messages</div></a>
+        </div>
+        <div class="col-sm-3">
+            <a href="javascript:void(0)"><div class="header" style="background-color: #2c2c54;">Account</div></a>
+        </div>
+        <div class="col-sm-3">
+            <a href="#"><div class="header" style="background-color: #2c2c54;">Reviews</div></a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6 sample" style="margin-right: 30px; overflow-x: hidden">
+            <div class="row sample">
+                {% if sampleprojs %}
+                {% for projs in sampleprojs %}
+                    {% if projs.sample_image %}
+                <a href="{% url 'home:postedsample' projs.id %}">
+                    <img src="/home{{ projs.sample_image.url }}" class="img-responsive" style="border-radius: 50%; width: 220px; height: 220px; margin: 15px 25px 15px" onerror="{% static 'home/no_image.png' %}">
+                    {% else %}
+                    <img src="{% static 'home/no_image.png' %}" class="img-responsive" style="border-radius: 50%; width: 220px; height: 220px;">
+                    {% endif %}
+                    <p style="margin: 15px 15px 15px; left: 50%">{{ projs }}</p>
+                    <p style="margin: 15px 15px 15px; left: 50%">{{ projs.description }}</p>
+                </a>
+                {% endfor %}
+                {% endif %}
+                
+            </div>
+            
+            
+        </div>
+            
+    </div>
+    <div class="row">
+        <div class="col-xs-6" style="margin-right: 30px; ">
+            <div class="row message">
+                {% if mesages %}
+                    {% for projs in mesages %}
+                        {% if projs.fromUser == request.user %}
+                            <li><a href="#">{{ projs.toUser }}</a></li>
+                        {% else %}
+                            <li><a href=#>{{ projs.fromUser }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+                
+            </div>
+            
+            
+        </div>
+            
+    </div>
+    
+</div>
+
+
+
+
+
+<script>
+   
+   function messagetoggle(){
+       $('.sample').css({display:none;});
+       $('.message').css({display:block});
+        
+    }
+
+
+    
+
+
+</script>
+        
+<!--
+        {% for msg in mesages %}
+                {% if msg.fromUser == request.user %}
+                    {{ msg.toUser }}
+                {% else %}
+                    {{ msg.fromUser }}
+                {% endif %}
+                {% endfor %}
+ -->
+
+
+{% endblock %}
+
+
+

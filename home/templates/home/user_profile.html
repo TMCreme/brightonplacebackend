@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<body>
+<div style="align-content: center; max-width: 80%">
+    <h4><strong>FREE REGISTRATION.</strong></h4>
+</div>
+
+
+		
+<form method="POST">
+    {% csrf_token %}
+    <input type="text" placeholder="Username" value="{{ form.username }}">
+    <div class="container">
+        <h2><button type="submit" >SUBMIT</button></h2>
+    </div>
+</form>
+
+
+</body>
+</html>

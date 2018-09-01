@@ -1,0 +1,62 @@
+{% extends 'home/basic.html' %}
+    
+    
+    
+{% block body %}
+{% load widget_tweaks %}
+
+<div class="container" style="align-content: center; max-width: 80%; margin-top: 50px;">
+    <h4><strong>FREE REGISTRATION.</strong></h4>
+</div>
+
+<div class="container">
+   
+    <form method="POST" action="." class="reg_form" style="line-height: 40px; margin: 15px 15px 10px;">
+        {% csrf_token %}
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-12">                                
+                    <div class="form-group floating-label">
+                        <!--label for="regular2">Username</label-->
+                        {{ form.username | add_class:"css_class" | attr:"placeholder:Username" }}
+                        
+                    </div>
+                </div>
+                <div class="col-sm-12">                                
+                    <div class="form-group floating-label">
+                        <!--label for="regular2">Email Address</label-->
+                        {{ form.email | add_class:"css_class" | attr:"placeholder:email address" }}      
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="form-group floating-label">
+                        <!--label for="regular2">Password</label-->
+                        {{ form.password1 | add_class:"css_class" | attr:"placeholder:Password" }}
+                        
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group floating-label">
+                        <!--label for="regular2">Password Confirmation</label-->
+                        {{ form.password2 | add_class:"css_class" | attr:"placeholder:Password Confirmation" }}
+                        
+                    </div>
+                </div>
+                <div class="col-sm-12 align-center">
+                    <div class="col-md-12">
+                        <hr>
+                        <div class="card-actionbar-row">
+                            <input type="submit" class="btn btn-flat btn-primary ink-reaction" value="SUBMIT">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div>
+        <p>Already have an account? <a href="javascript:void(0)" onclick="document.getElementById('id01').style.display='block'">Login</a></p>
+    </div>
+</div>
+
+{% endblock %}
+

@@ -1,0 +1,17 @@
+{% extends 'home/basic.html' %}
+
+
+{% block body %}
+<div class="container">
+    {% for name in sampleservicedisplay_list %}
+        <p>{{ name.service }}</p>
+        <p>{{ name.servicecategory }}</p>
+    {% endfor %}
+</div>
+
+
+{% endblock %}
+
+
+
+

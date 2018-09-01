@@ -1,0 +1,27 @@
+{% extends 'home/basic.html' %}
+
+
+{% block body %}
+
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 col-sm-3">
+            <img src="/home{{ servicesample.sample_image.url }}" style="width: 900px; height: 350px">
+        </div>
+        <div class="col-sm-6 col-sm-3">
+            <p>{{ servicesample.service }}</p>
+            <p>{{ servicesample.servicecategory }}</p>
+            <p>{{ servicesample.description }}</p>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+
+
+
+

@@ -1,0 +1,109 @@
+{% extends 'home/basic.html' %}
+
+
+
+{% block body %}
+{% load widget_tweaks %}
+
+<div class="col-12 col-md-3 col-2 bd-sidebar">
+      <a href="{% url 'home:profile' %}">Go to your dashboard</a>
+</div>
+
+
+<div class="container">
+    <div class="header mx-auto" style="width: 400px;">
+        <p>EDIT YOUR PROFILE INFORMATION AT ANYTIME</p>
+    </div>
+    
+    <form method="post" class="mx-auto" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <div class="form-group row">
+            <label for="colFormLabel" class="col-sm-2 col-form-label">First Name</label>
+            <div class="col-sm-10">
+                {{ user_form.first_name | add_class:"css_class" | attr:"placeholder:First Name" }}
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="colFormLabel" class="col-sm-2 col-form-label">Last Name</label>
+            <div class="col-sm-10">
+                {{ user_form.last_name | add_class:"css_class" | attr:"placeholder:Last Name" }}
+            </div>
+        </div>
+        
+        <div class="form-group row">
+            <label for="colFormLabel" class="col-sm-2 col-form-label">Phone Number</label>
+            <div class="col-sm-10">
+                {{ form.phone_number | add_class:"css_class" | attr:"placeholder:Phone Number" }}
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="colFormLabel" class="col-sm-2 col-form-label">Website</label>
+            <div class="col-sm-10">
+                {{ form.website | add_class:"css_class" | attr:"placeholder:Website" }}
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="colFormLabel" class="col-sm-2 col-form-label">City</label>
+            <div class="col-sm-10">
+                {{ form.city | add_class:"css_class" | attr:"placeholder:City" }}
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="colFormLabel" class="col-sm-2 col-form-label">Occupation</label>
+            <div class="col-sm-10">
+                {{ form.occupation | add_class:"css_class" | attr:"placeholder:Occupation" }}
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="colFormLabel" class="col-sm-2 col-form-label">Country</label>
+            <div class="col-sm-10">
+                {{ form.country | add_class:"css_class" | attr:"placeholder:Country" }}
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="colFormLabel" class="col-sm-2 col-form-label">Organization</label>
+            <div class="col-sm-10">
+                {{ form.organization | add_class:"css_class" | attr:"placeholder:Organization" }}
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="colFormLabel" class="col-sm-2 col-form-label">Profile Picture</label>
+            <div class="col-sm-10">
+                {{ form.profile_picture | add_class:"css_class" | attr:"placeholder:Profile Picture" }}
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="colFormLabel" class="col-sm-2 col-form-label">Your Bio</label>
+            <div class="col-sm-10">
+                {{ form.bio | add_class:"css_class" | attr:"placeholder:First Impression is always critical. How will you like to introduce yourself" }}
+            </div>
+        </div>
+        
+        
+      
+        <div class="col-sm-12 mx-auto" style="width: 50px; margin-bottom: 50px;">
+            <div class="col-md-12">
+                <hr>
+                <div class="card-actionbar-row">
+                    <input type="submit" class="btn btn-flat btn-primary ink-reaction" value="SUBMIT">
+                </div>
+            </div>
+        </div>
+        
+        
+    </form>
+  
+    
+</div>
+
+ 
+
+
+
+
+
+
+{% endblock %}
+
+

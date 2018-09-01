@@ -1,0 +1,146 @@
+{% extends 'home/basic.html' %}
+
+{% block body %}
+{% load widget_tweaks %}
+
+
+<div class="col-12 col-md-3 col-2 bd-sidebar">
+      <a href="{% url 'home:profile' %}">Go to your dashboard</a>
+</div>
+
+
+<div class="container">
+    
+    <div class="header mx-auto" style="width: 500px;">
+        <p>SELECT YOUR CATEGORY AND AS MANY SERVICES</p>
+    </div>
+    
+    
+    
+    <div class="row">
+        <div class="col-sm-6 col-sm-3" style="margin: 35px 15px 15px 35px;">
+            <form method="post" class="mx-auto" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group row">
+                    <label for="colFormLabel" class="col-sm-2 col-form-label">Category</label>
+                    <div class="col-sm-10">
+                        {{ service_form.service_category | add_class:"css_class" | attr:"placeholder:Service Categoy" }}
+                    </div>
+                </div>
+              
+
+                
+                <div class="form-group row">
+                    <label for="colFormLabel" class="col-sm-2 col-form-label">Service</label>
+                    <div class="col-sm-10">
+                       <ul id="id_service">
+                        </ul>
+                    </div>
+                </div>
+                <input type="submit" id="check_submit" value="Submit">
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    //alert('funcionou');
+    $("#id_service_category").change(function(){populateService(this)});
+    category = {{ service_form.categ | safe }}
+    servic = {{ service_form.servcat | safe }}
+    servicc = {{ service_form.servlist |safe }}
+    
+    populateCategory();
+    $("#id_service").empty();
+    $("#id_service").append('<input type="checkbox" value="" disabled selected>First select a Category');
+    
+    function populateCategory() {
+        $("#id_service_category").empty();
+        $("#id_service_category").append('<option value="" disabled selected>Select your option</option>');
+        $.each(category, function(v) {
+            $('#id_service_category') 
+            .append($("<option></option>")
+                   .attr("value", category[v])
+                   .text(category[v]))
+        })
+    }   
+    
+    var html = '<li><label for="id_service_{{ forloop.counter0 }}"></label></li>'
+                    '<input type="checkbox" name="service", value=servic[cat][g], id="id_service_{{ forloop.counter0 }}>'
+    function populateService(event){
+        categ = $("#id_service_category option:selected").text();
+        $("#id_service").empty();
+        $("#id_service").append('<option value="" disabled selected>Select your option</option>');
+        for (let cat in servic) {
+            if (cat == categ) {
+                for (var g in servic[cat]) {
+                    $("#id_service")
+                        //.append($(html))
+                        .append($("<input type='checkbox', name='service'/>")
+                                .attr({'value':servic[cat][g], 'id':"id_service_{{ forloop.counter0 }}"}))
+                        .append($("<label for='id_service_{{ forloop.counter0 }}'></label><br/>").text(servic[cat][g]))
+                   
+                    //Not getting selected value.
+                }
+            }
+        }
+    }
+ 
+    
+</script>
+
+{% endblock %}
+<!--
+<tr>
+    <th><label>Service:</label></th>
+    <td>
+        <ul class="errorlist"><li>This field is required.</li></ul>
+        <ul id="id_service">
+            <li><label for="id_service_0">
+                <input type="checkbox" name="service" value="Wedding gowns" id="id_service_0" />Wedding gowns</label>
+
+            </li>
+            <li><label for="id_service_1">
+                <input type="checkbox" name="service" value="Office wear" id="id_service_1" />Office wear</label>
+
+            </li>
+        </ul>
+    </td>
+</tr>
+
+
+<!--
+{% for value, text in service_form.service.field.choices %}
+  <div class="ui slider checkbox">
+    <input id="id_providers_{{ forloop.counter0 }}" name="{{ form.service.name }}" type="checkbox" value="{{ value }}"{% if value in service %} checked="checked"{% endif %}>
+    <label>{{ text }}</label>
+  </div>
+{% endfor %}
+-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
