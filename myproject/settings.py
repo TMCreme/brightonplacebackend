@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '%kn*hytw!ta295w_5a*kwr)$vlk0)26y9nmw9%)-06tnr@1d&)'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['brightonplace.herokuapp.com']
 
@@ -83,8 +83,12 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'd8itar11k139el',
+        'USER': 'wfyomzbdishxmi',
+        'PASSWORD': '665ae8e3f6030947c7757c2b95ad090cde77be7f2411482c46028f97a3a47ccf',
+        'HOST': 'ec2-50-17-194-129.compute-1.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
