@@ -117,8 +117,10 @@ def LogoutView(request):
 	return redirect('/home')
 
 """
+	"""
 This will have the option of pending the authentication of service providers.
 """
+	"""
 
 #The login required decorator is needed cos you need to login to see and edit your profile
 @login_required
