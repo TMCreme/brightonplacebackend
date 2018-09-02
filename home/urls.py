@@ -10,7 +10,7 @@ app_name = 'home'
 urlpatterns = [
     path('', views.indexView, name='index'),
     #path('', auth_views.login, {'template_name':'home/index.html'}, name='index'),
-"""    path('search_results/', views.searchview, name='search_results'),
+    path('search_results/', views.searchview, name='search_results'),
     path('logout/', views.LogoutView, name='logout'),
     path('signup/', views.signup, name='signup'),
     #path('view-profile/', views.view_profile, name='view-profile'),
@@ -29,13 +29,13 @@ urlpatterns = [
     path('postprojectlist/', views.postedprojectlist, name='postprojectlist'),
     path('projectbid/', views.projectbidview, name='projectbid'),
     #re_path('profile/(?P<pk>[0-9]+)/$', views.EditProfileView.as_view(), name='edit_profile'),
-    #path('user-profile/', views.user_profile, name='user_profile'),"""
+    #path('user-profile/', views.user_profile, name='user_profile'),
 ]
 
-"""
+
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-"""
+
 
 
 

@@ -1,4 +1,4 @@
-"""from django.shortcuts import render, redirect, get_object_or_404 
+from django.shortcuts import render, redirect, get_object_or_404 
 from braces.views import LoginRequiredMixin
 from django.views import generic
 from django.contrib.auth import get_user_model
@@ -24,11 +24,9 @@ import random
 
 
 """
-"""
 The homepage is designed to be a welcome platform. All other information that should be included in the 
 basic html that have to be reflected on every page is handled in the context_processors.
 TO DO: Change the menubar display at user login (may be really done in the template)
-"""
 """
 def indexView(request):
 	#This is handling user login since I want to include other stuff in my view
@@ -71,11 +69,10 @@ def signup(request):
 			password = form.cleaned_data['password1']
 			if form.cleaned_data['is_service_provider'] is True:
 				"""
-"""
 				#TODO: Add the logic that handle the pending confirmation
 				to be added to service providers
 				Should send an email to the superuser/staff to be vetting
-				""""""
+				"""
 				form.save()
 				messages.success(request,'You are signing up as a Service Provider. Complete the following...')
 				return redirect('home:service_registration')
@@ -117,9 +114,7 @@ def LogoutView(request):
 	return redirect('/home')
 
 """
-"""
 This will have the option of pending the authentication of service providers.
-"""
 """
 
 #The login required decorator is needed cos you need to login to see and edit your profile
@@ -200,11 +195,9 @@ def room(request, room_name):
 
 
 """
-"""
 #This can be used to browse other users dashboard to see what they have:
 if they are service providers, then their services will be listed on 
 their respective pages
-"""
 """
 def userdashboard(request, id):
 	resulted_user = User.objects.get(id=id)
@@ -379,7 +372,6 @@ def searchview(request):
 
 
 """
-"""
 def UserLoginView(request):
 	if request.method == "POST":
 		form = UserLogin(request.POST)
@@ -401,7 +393,6 @@ def UserLoginView(request):
 		form = UserLogin()
 		return render(request, 'home/index.html', {'form':form})"""
 
-def indexView(request):
-        return
+
 
 # Create your views here.
