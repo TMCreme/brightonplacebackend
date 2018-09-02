@@ -199,7 +199,7 @@ def room(request, room_name):
 	})
 
 
-"""'
+"""
 """
 #This can be used to browse other users dashboard to see what they have:
 if they are service providers, then their services will be listed on 
