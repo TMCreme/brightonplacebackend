@@ -75,8 +75,8 @@ def signup(request):
 				#TODO: Add the logic that handle the pending confirmation
 				to be added to service providers
 				Should send an email to the superuser/staff to be vetting
-				"""
-	"""			form.save()
+				""""""
+				form.save()
 				messages.success(request,'You are signing up as a Service Provider. Complete the following...')
 				return redirect('home:service_registration')
 
