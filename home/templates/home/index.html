@@ -77,7 +77,7 @@
             <div class="row">
                 {% for item in catt %}
                     <div class="col-6 col-sm-3" style="margin: 10px 5px 10px 15px;">
-                        <a href="{% url 'home:servicecategory' item.slug %}"><img class="img-responsive img-fluid" style="border-radius: 50%;" src="/home{{ item.image.url }}" onerror="this.src='{% static 'home/no_image.png' %}'">
+                        <a href="{% url 'home:servicecategory' item.slug %}"><img class="img-responsive img-fluid" style="border-radius: 50%;" src="{{ item.image.url }}" onerror="this.src='{% static 'home/no_image.png' %}'">
                             <p class="centered" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%)">{{ item.name }}</p></a>
                     </div>
                
