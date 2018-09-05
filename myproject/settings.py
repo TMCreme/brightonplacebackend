@@ -135,8 +135,8 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, "static/")
-
+"""
 MEDIA_URL = 'https://s3.us-east-2.amazonaws.com/dziedzormdelasi/'
 
 MEDIA_ROOT = "https://s3.us-east-2.amazonaws.com/dziedzormdelasi/")
-
+"""
