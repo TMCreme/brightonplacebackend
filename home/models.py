@@ -21,7 +21,7 @@ class UserProfile(models.Model):
 	country = models.CharField(max_length=250, default='', blank=True)
 	occupation = models.CharField(max_length=300, default='', blank=True)
 	organization = models.CharField(max_length=300, default='',blank=True)
-	profile_picture = models.ImageField(blank=True, null=True)
+	profile_picture = models.ImageField(upload_to='home', blank=True, null=True)
 
 	def __str__(self):
 		return self.user.username
