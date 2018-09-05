@@ -162,6 +162,7 @@ STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
 
 AWS_MEDIA_LOCATION = 'media'
 MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, AWS_MEDIA_LOCATION)
+MEDIA_ROOT = MEDIA_URL
 
 DEFAULT_FILE_STORAGE = 'myproject.storage_backends.MediaStorage'
 
