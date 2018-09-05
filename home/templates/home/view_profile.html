@@ -15,7 +15,7 @@
     <div class="row">
         <div class="col-xs-6" style="margin-right: 30px;">
             {% if up.profile_picture %}
-                <img src="/home{{ up.profile_picture.url }}" class="userprofile img-responsive" style="border-radius: 50%; width: 122px; height: 122px;" onerror="{% static 'home/no_image.png' %}">
+                <img src="{{ up.profile_picture.url }}" class="userprofile img-responsive" style="border-radius: 50%; width: 122px; height: 122px;" onerror="{% static 'home/no_image.png' %}">
             {% else %}
                 <img src="{% static 'home/no_image.png' %}" class="userprofile img-responsive" style="border-radius: 50%; width: 122px; height: 122px;">
             {% endif %}
@@ -59,7 +59,7 @@
                 {% for projs in sampleprojs %}
                     {% if projs.sample_image %}
                 <a href="{% url 'home:postedsample' projs.id %}">
-                    <img src="/home{{ projs.sample_image.url }}" class="img-responsive" style="border-radius: 50%; width: 220px; height: 220px; margin: 15px 25px 15px" onerror="{% static 'home/no_image.png' %}">
+                    <img src="{{ projs.sample_image.url }}" class="img-responsive" style="border-radius: 50%; width: 220px; height: 220px; margin: 15px 25px 15px" onerror="{% static 'home/no_image.png' %}">
                     {% else %}
                     <img src="{% static 'home/no_image.png' %}" class="img-responsive" style="border-radius: 50%; width: 220px; height: 220px;">
                     {% endif %}
