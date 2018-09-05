@@ -135,7 +135,7 @@ STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 
-MEDIA_URL = '/media/'
+MEDIA_URL = 'https://s3.us-east-2.amazonaws.com/dziedzormdelasi/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
+MEDIA_ROOT = "https://s3.us-east-2.amazonaws.com/dziedzormdelasi/")
 
