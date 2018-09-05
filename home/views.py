@@ -155,6 +155,7 @@ def edit_profile(request):
 				user_update.update(occupation=form.cleaned_data['occupation'])
 				if form.cleaned_data['profile_picture']:
 					user_update.update(profile_picture=form.cleaned_data['profile_picture'])
+					print(form.cleaned_data['profile_picture'])
 				else:
 					user_update.update(profile_picture=user.profile_picture)
 				user_form.save()
