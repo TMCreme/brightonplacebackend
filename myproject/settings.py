@@ -144,7 +144,7 @@ MEDIA_ROOT = "https://s3.us-east-2.amazonaws.com/dziedzormdelasi/")
 
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'mysite/static'),
+    os.path.join(BASE_DIR, 'home/static'),
 ]
 
 AWS_ACCESS_KEY_ID = 'AKIAJIUBN2QO3N6J3QIQ'
