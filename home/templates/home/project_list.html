@@ -15,7 +15,7 @@
         <div class="col-sm-6 col-sm-3">
             <a href="{% url 'home:postedproject' name.id %}">
                 {% if name.image %}
-                    <img src="/home{{ name.image.url }}" style="width: 250px; height: 250px;">
+                    <img src="{{ name.image.url }}" style="width: 250px; height: 250px;">
                 {% else %}
                     <img src="{% static 'home/no_image.png' %}" style="width: 250px; height: 250px;">
                 {% endif %}

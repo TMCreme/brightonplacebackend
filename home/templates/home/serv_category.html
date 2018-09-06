@@ -23,7 +23,7 @@
     <div class="row">
         {% for objects in sercatlist %}
         <div class="border border-light col-6 col-sm-3" style="margin: 10px 5px 10px 15px;">
-            <a href="{% url 'home:service_result_page' objects.slug %}"><img style="width: 240px; height: 200px" src="/home{{ objects.sample_image.url }}" class="circle img-fluid" onerror="this.src='{% static 'home/no_image.png' %}'"></a>
+            <a href="{% url 'home:service_result_page' objects.slug %}"><img style="width: 240px; height: 200px" src="{{ objects.sample_image.url }}" class="circle img-fluid" onerror="this.src='{% static 'home/no_image.png' %}'"></a>
             
             <p>{{ objects.name }}</p>
     </div>

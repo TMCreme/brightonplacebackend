@@ -14,7 +14,7 @@
     <div class="row">
         <div class="col-xs-6" style="margin-right: 30px;">
             {% if resulted_user_profile.profile_picture %}
-                <img src="/home{{ resulted_user_profile.profile_picture.url }}" class="userprofile img-responsive" style="border-radius: 50%; width: 122px; height: 122px;" onerror="{% static 'home/no_image.png' %}">
+                <img src="{{ resulted_user_profile.profile_picture.url }}" class="userprofile img-responsive" style="border-radius: 50%; width: 122px; height: 122px;" onerror="{% static 'home/no_image.png' %}">
             {% else %}
                 <img src="{% static 'home/no_image.png' %}" class="userprofile img-responsive" style="border-radius: 50%; width: 122px; height: 122px;">
             {% endif %}
