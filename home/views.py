@@ -84,8 +84,8 @@ def signup(request):
 			form.save()
 			mail = EmailMessage("Hi "+username+",\n Thank you for signing up with brighton.", settings.EMAIL_HOST_USER, [email])
 			mail.send()
-			user = authenticate(username=username, password=password)
-			login(request, user)
+			#user = authenticate(username=username, password=password)
+			#login(request, user)
 			messages.success(request, 'Thank you for signing up. WELCOME!!!')
 			return redirect('/home/profile')
 		else:
