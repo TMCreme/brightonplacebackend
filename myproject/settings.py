@@ -36,7 +36,7 @@ ALLOWED_HOSTS = ['brightonplace.herokuapp.com']
 
 LOGIN_REDIRECT_URL = '/home/edit_profile/'
 LOGIN_URL = '/home/'
-LOGOUT_URL = '/home'
+LOGOUT_REDIRECT_URL = '/home'
 
 # Application definition
 
