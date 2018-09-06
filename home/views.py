@@ -78,7 +78,6 @@ def signup(request):
 				Should send an email to the superuser/staff to be vetting
 				"""
 				form.save()
-				
 				messages.success(request,'You are signing up as a Service Provider. Complete the following...')
 				return redirect('home:service_registration')
 
@@ -118,6 +117,7 @@ def serviceregistration(request):
 			serv_category = cd['service_category']
 			serv_reg = cd['service']
 			print(serv_reg)
+			#Send the email confirmation to the user and self including the services chosen
 			#service_form.save()
 			messages.success(request,'You have successfully applied for service provider status. Your credentials will be vetted and feedback sent to you by email.')
 			return redirect('home:profile')
@@ -258,8 +258,8 @@ def postprojectview(request):
 	if request.method == 'POST':
 		postproject_form = PostProjectForm(request.POST, request.FILES)
 		if postproject_form.is_valid():
-			category = Service.objects.get(servicecategory__name=postproject_form.cleaned_data['service'])
-			postproject_form.cleaned_data['category'] = category
+			category = Service.objects.get(servicecategory__name=postproject_form.cleaned_data['category'])
+			#postproject_form.cleaned_data['category'] = category
 			print(postproject_form.cleaned_data['category'])
 			#Clean the form and send a notifiction to all service providers listed under the particular service.
 			postproject_form.save()
