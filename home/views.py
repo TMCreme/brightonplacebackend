@@ -1,4 +1,5 @@
-from django.shortcuts import render, redirect, get_object_or_404 
+from django.shortcuts import render, redirect, get_object_or_404
+from django.urls import reverse_lazy
 from braces.views import LoginRequiredMixin
 from django.views import generic
 from django.contrib.auth import get_user_model
@@ -87,7 +88,7 @@ def signup(request):
 			#user = authenticate(username=username, password=password)
 			#login(request, user)
 			messages.success(request, 'Thank you for signing up. WELCOME!!!')
-			return redirect('home')
+			return redirect(reverse_lazy('home'))
 		else:
 			messages.error(request, 'Sorry, Form validation failed. Try refreshing the page and re-submit credentials to join')
 			#print('Form is not valid')
