@@ -94,7 +94,7 @@ def signup(request):
 			#print('Form is not valid')
 	else:
 		form = RegistrationForm()
-		return render(request, 'home/reg_form.html', {'form':form})
+	return render(request, 'home/reg_form.html', {'form':form})
 
 def serviceregistration(request):
 	service_form = ServiceRegistration
