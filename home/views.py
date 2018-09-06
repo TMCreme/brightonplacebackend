@@ -87,7 +87,7 @@ def signup(request):
 			#user = authenticate(username=username, password=password)
 			#login(request, user)
 			messages.success(request, 'Thank you for signing up. WELCOME!!!')
-			return redirect('/home/profile')
+			return redirect('home:profile')
 		else:
 			messages.error(request, 'Sorry, Form validation failed. Try refreshing the page and re-submit credentials to join')
 			#print('Form is not valid')
