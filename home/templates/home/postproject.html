@@ -1,5 +1,11 @@
 {% extends 'home/basic.html' %}
 
+{% block css %}
+<style>
+    #id_client{display: none;}
+</style>
+{% endblock %}
+
 {% block body %}
 {% load static %}
 {% load widget_tweaks %}
@@ -17,6 +23,12 @@
     <form method="post" class="mx-auto" enctype="multipart/form-data">
         {% csrf_token %}
         
+		<div class="form-group row">
+            <!--label for="colFormLabel" class="col-sm-2 col-form-label">Client</label-->
+            <div class="col-sm-10">
+                {{ postproject_form.client | add_class:"css_class" | attr:"placeholder:Client" }}
+            </div>
+        </div>
         <div class="form-group row">
             <label for="colFormLabel" class="col-sm-2 col-form-label">Title</label>
             <div class="col-sm-10">
