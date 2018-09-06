@@ -83,15 +83,20 @@ def signup(request):
 				return redirect('home:service_registration')
 
 			form.save()
-			send_mail(
+			"""send_mail(
                                 'Welcome Message from the Team',
                                 'Thank you for signing up with us. Login and update your profile',
                                 settings.EMAIL_HOST_USER,
                                 [email],
                                 fail_silently=False,
+                                )"""
+			mail = EmailMessage(
+                                'Welcome Message from the Team',
+                                "Hi "+username+",\n Thank you for signing up with brighton.",
+                                settings.EMAIL_HOST_USER,
+                                [email],
                                 )
-			#mail = EmailMessage("Hi "+username+",\n Thank you for signing up with brighton.", settings.EMAIL_HOST_USER, [email])
-			#mail.send()
+			mail.send()
 			#user = authenticate(username=username, password=password)
 			#login(request, user)
 			messages.success(request, 'Thank you for signing up. WELCOME!!!')
