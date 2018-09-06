@@ -119,6 +119,8 @@ class SampleServiceDisplayForm(forms.ModelForm):
 
 
 class ProjectBidForm(forms.ModelForm):
+	commission = forms.DecimalField(widget=forms.TextInput(attrs={'readonly':'readonly'}))
+	total_cost = forms.DecimalField(widget=forms.TextInput(attrs={'readonly':'readonly'}))
 
 	class Meta:
 		model = ProjectBid
