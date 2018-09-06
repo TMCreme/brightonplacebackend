@@ -91,7 +91,7 @@ def signup(request):
 			return redirect(reverse_lazy('home'))
 		else:
 			messages.error(request, 'Sorry, Form validation failed. Try refreshing the page and re-submit credentials to join')
-			#print('Form is not valid')
+			print(form.errors)
 	else:
 		form = RegistrationForm()
 	return render(request, 'home/reg_form.html', {'form':form})
