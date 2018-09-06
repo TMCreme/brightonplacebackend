@@ -36,6 +36,7 @@ ALLOWED_HOSTS = ['brightonplace.herokuapp.com']
 
 LOGIN_REDIRECT_URL = '/home/edit_profile/'
 LOGIN_URL = '/home/'
+LOGOUT_URL = '/home'
 
 # Application definition
 
@@ -171,7 +172,7 @@ AWS_MEDIA_LOCATION = 'media'
 MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, AWS_MEDIA_LOCATION)
 MEDIA_ROOT = MEDIA_URL
 
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+DEFAULT_FILE_STORAGE = 'myproject.storage_backends.MediaStorage'
 
 
 
