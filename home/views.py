@@ -258,7 +258,7 @@ def postprojectview(request):
 	if request.method == 'POST':
 		postproject_form = PostProjectForm(request.POST, request.FILES)
 		if postproject_form.is_valid():
-			category = Service.objects.get(servicecategory__name=postproject_form.cleaned_data['category'])
+			#category = Service.objects.get(servicecategory__name=postproject_form.cleaned_data['category'])
 			#postproject_form.cleaned_data['category'] = category
 			print(postproject_form.cleaned_data['category'])
 			#Clean the form and send a notifiction to all service providers listed under the particular service.
