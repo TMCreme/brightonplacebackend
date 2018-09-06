@@ -83,15 +83,15 @@ def signup(request):
 				return redirect('home:service_registration')
 
 			form.save()
-			#mail = EmailMessage("Hi "+username+",\n Thank you for signing up with brighton.", settings.EMAIL_HOST_USER, [email])
-			#mail.send()
+			mail = EmailMessage("Hi "+username+",\n Thank you for signing up with brighton.", settings.EMAIL_HOST_USER, [email])
+			mail.send()
 			#user = authenticate(username=username, password=password)
 			#login(request, user)
 			messages.success(request, 'Thank you for signing up. WELCOME!!!')
-			return redirect(reverse_lazy('home'))
+			return redirect('/home')
 		else:
 			messages.error(request, 'Sorry, Form validation failed. Try refreshing the page and re-submit credentials to join')
-			print(form.errors)
+			#print(form.errors)
 	else:
 		form = RegistrationForm()
 	return render(request, 'home/reg_form.html', {'form':form})
