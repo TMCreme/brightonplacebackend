@@ -8,6 +8,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import UserChangeForm
 from django.contrib.auth.decorators import login_required
+from django.core.email import send_mail, EmailMessage
+from django.conf import settings
 from django.contrib import messages
 from .models import (
 	UserProfile, Dialog, Message, ServiceCategory, 
@@ -67,6 +69,7 @@ def signup(request):
 		if form.is_valid():
 			username = form.cleaned_data['username']
 			password = form.cleaned_data['password1']
+			email = form.cleaned_data['email']
 			if form.cleaned_data['is_service_provider'] is True:
 				"""
 				#TODO: Add the logic that handle the pending confirmation
@@ -74,10 +77,13 @@ def signup(request):
 				Should send an email to the superuser/staff to be vetting
 				"""
 				form.save()
+				
 				messages.success(request,'You are signing up as a Service Provider. Complete the following...')
 				return redirect('home:service_registration')
 
 			form.save()
+			mail = EmailMessage("Hi "+username+",\n Thank you for signing up with brighton."+str(sender), settings.EMAIL_HOST_USER, [email])
+			mail.send()
 			user = authenticate(username=username, password=password)
 			login(request, user)
 			messages.success(request, 'Thank you for signing up. WELCOME!!!')
