@@ -48,6 +48,20 @@
     </div>
      
 </div>
+<div class="container">
+    <div class="header">Existing Bids</div>
+    <div class="row">
+        {% for bids in existing_bids %}
+            
+        <div class="col" style="border-color: blue">
+            <p>Bidder: {{ bids.bidder }}</p>
+            <p>Description:  {{ bids.description }} </p>
+            <p>Cost: GH¢ {{ bids.total_cost }}</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
 <div class="container" >
     <div class="row bidding_form" id="bid_form">
             <form method="post" class="mx-auto" enctype="multipart/form-data">
@@ -129,12 +143,27 @@
     }
 </script>
 <script>
-    $("#id_cost").on('change', function () {
+    
+    var cost = document.getElementById("id_cost");
+    cost.onkeyup = function() {
+        var cost_value = cost.value;
+        document.getElementById("id_commission").value = parseFloat(cost_value)*0.2;
+        document.getElementById("id_total_cost").value = parseFloat(cost_value)+(parseFloat(cost_value)*0.2)
+    }
+    /*
+        $("#id_cost").on('change', function () {
+            alert($(this).val())
+            $("#id_commission").val($(this).val()*0.2);
+            var b = parseFloat($(this).val()*0.2);
+            $("#id_total_cost").val(parseFloat($(this).val())+parseFloat($(this).val()*0.2));
+        });
+ */
+    
         
-        $("#id_commission").val($(this).val()*0.2);
-        var b = parseFloat($(this).val()*0.2);
-        $("#id_total_cost").val(parseFloat($(this).val())+parseFloat($(this).val()*0.2));
-});
+        
+        
+        
+
     
 </script>
 

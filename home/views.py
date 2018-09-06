@@ -321,11 +321,12 @@ def postedprojectlist(request):
 @login_required
 def postedprojectview(request, id):
 	posted_project = PostProject.objects.get(id=id)
+	existing_bids = ProjectBid.objects.filter(project__id=id)
 	reference = ''.join(random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in range(20))
 	bid_form_initial = {
 	'bid_reference':reference,
 	'project':posted_project,
-	'bidder':request.user,
+	'bidder':ServiceProvider.objects.get(user__username=request.user.username),
 	'client':posted_project.client,
 	'service':posted_project.service,
 	}
@@ -339,7 +340,7 @@ def postedprojectview(request, id):
 		else:
 			messages.error(request,'Your bid was not placed due to Form validation failure. Please try again later.')
 			print(projectbid_form.errors)
-	args = {'posted_project':posted_project, 'projectbid_form':projectbid_form}
+	args = {'posted_project':posted_project, 'projectbid_form':projectbid_form,'existing_bids':existing_bids}
 	return render(request, 'home/posted_project.html', args)
 
 #Take this to the project display page and make the form a popup or something else. Then include an initial arg for bid_reference, project
