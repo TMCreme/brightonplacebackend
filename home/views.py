@@ -82,7 +82,7 @@ def signup(request):
 				return redirect('home:service_registration')
 
 			form.save()
-			mail = EmailMessage("Hi "+username+",\n Thank you for signing up with brighton."+str(sender), settings.EMAIL_HOST_USER, [email])
+			mail = EmailMessage("Hi "+username+",\n Thank you for signing up with brighton.", settings.EMAIL_HOST_USER, [email])
 			mail.send()
 			user = authenticate(username=username, password=password)
 			login(request, user)
