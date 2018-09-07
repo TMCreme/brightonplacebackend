@@ -71,6 +71,8 @@ def signup(request):
 			username = form.cleaned_data['username']
 			password = form.cleaned_data['password1']
 			email = form.cleaned_data['email']
+			user = authenticate(username=username, password=password)
+			login(request, user)
 			if form.cleaned_data['is_service_provider'] is True:
 				"""
 				#TODO: Add the logic that handle the pending confirmation
