@@ -25,7 +25,7 @@
 
 
 <div class="container" >
-	<div class="header">Bid here</div>
+	<div class="header">Bid on this project</div>
     <div class="row bidding_form" id="bid_form">
             <form method="post" class="mx-auto" enctype="multipart/form-data">
                 {% csrf_token %}
@@ -61,12 +61,7 @@
                     </div>
                 </div>
                 
-                <div class="form-group row">
-                    <label for="colFormLabel" class="col-sm-2 col-form-label">Description</label>
-                    <div class="col-sm-10">
-                        {{ projectbid_form.description | add_class:"css_class" | attr:"placeholder:Description" }}
-                    </div>
-                </div>
+                
                 <div class="form-group row">
                     <label for="colFormLabel" class="col-sm-2 col-form-label">Cost</label>
                     <div class="col-sm-10" id="provider_cost">
@@ -83,6 +78,12 @@
                     <label for="colFormLabel" class="col-sm-2 col-form-label">Total Cost</label>
                     <div class="col-sm-10" id="client_total">
                         {{ projectbid_form.total_cost | add_class:"css_class" | attr:"placeholder:Total Cost" }}
+                    </div>
+                </div>
+				<div class="form-group row">
+                    <label for="colFormLabel" class="col-sm-2 col-form-label">Description</label>
+                    <div class="col-sm-10">
+                        {{ projectbid_form.description | add_class:"css_class" | attr:"placeholder:Description" }}
                     </div>
                 </div>
 
