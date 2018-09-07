@@ -85,8 +85,6 @@ def signup(request):
 				to be added to service providers
 				Should send an email to the superuser/staff to be vetting
 				"""
-				#form.save()
-				#login(request, request.user, backend='django.contrib.auth.backends.ModelBackend')
 				messages.success(request,'You are signing up as a Service Provider. Complete the following...')
 				return redirect('home:service_registration')
 
@@ -105,8 +103,6 @@ def signup(request):
                                 [email],
                                 )
 			mail.send()
-			#user = authenticate(username=username, password=password)
-			#login(request, request.user, backend='django.contrib.auth.backends.ModelBackend')
 			messages.success(request, 'Thank you for signing up. WELCOME!!!')
 			return redirect('/home')
 		else:
@@ -119,6 +115,8 @@ def signup(request):
 def serviceregistration(request):
 	service_form = ServiceRegistration
 	serv = Service.objects.all()
+	current_user = User.objects.get(username=request.user)
+	email = current_user.email
 	if request.method == 'POST':
 		service_form = ServiceRegistration(request.POST)
 		if service_form.is_valid():
@@ -128,13 +126,13 @@ def serviceregistration(request):
 			print(serv_reg)
 			#Send the email confirmation to the user and self including the services chosen
 			#service_form.save()
-			"""mail = EmailMessage(
+			mail = EmailMessage(
 					'Welcome Message from the Team',
 					"Hi "+username+", Thank you for signing up with brighton. We also acknowledge your request to be a service provider. Your credentials will be vetted and response communicated to you as soon as possible. Should we require additional information, we will contact you. Thanks once again.",
 					settings.EMAIL_HOST_USER,
                     [email],
 					)
-			mail.send()"""
+			mail.send()
 			messages.success(request,'You have successfully applied for service provider status. Your credentials will be vetted and feedback sent to you by email.')
 			return redirect('home:profile')
 		else:
