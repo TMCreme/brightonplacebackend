@@ -68,10 +68,16 @@ def signup(request):
 	if request.method == "POST":
 		form = RegistrationForm(request.POST)
 		if form.is_valid():
+			user = form.save(commit=False)
 			username = form.cleaned_data['username']
 			password = form.cleaned_data['password1']
 			email = form.cleaned_data['email']
-			#user = authenticate(username=username, password=password)
+			user.set_password(password)
+			user.save()
+			user = authenticate(username=username, password=password)
+			if user is not None:
+				if user.is_active:
+					login(request, user)
 			#login(request, user)
 			if form.cleaned_data['is_service_provider'] is True:
 				"""
@@ -79,8 +85,8 @@ def signup(request):
 				to be added to service providers
 				Should send an email to the superuser/staff to be vetting
 				"""
-				form.save()
-				login(request, request.user, backend='django.contrib.auth.backends.ModelBackend')
+				#form.save()
+				#login(request, request.user, backend='django.contrib.auth.backends.ModelBackend')
 				messages.success(request,'You are signing up as a Service Provider. Complete the following...')
 				return redirect('home:service_registration')
 
@@ -100,7 +106,7 @@ def signup(request):
                                 )
 			mail.send()
 			#user = authenticate(username=username, password=password)
-			login(request, request.user, backend='django.contrib.auth.backends.ModelBackend')
+			#login(request, request.user, backend='django.contrib.auth.backends.ModelBackend')
 			messages.success(request, 'Thank you for signing up. WELCOME!!!')
 			return redirect('/home')
 		else:
