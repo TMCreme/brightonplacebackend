@@ -80,7 +80,7 @@ def signup(request):
 				Should send an email to the superuser/staff to be vetting
 				"""
 				form.save()
-				login(request, user, backend='django.contrib.auth.backends.ModelBackend')
+				login(request, request.user, backend='django.contrib.auth.backends.ModelBackend')
 				messages.success(request,'You are signing up as a Service Provider. Complete the following...')
 				return redirect('home:service_registration')
 
@@ -100,7 +100,7 @@ def signup(request):
                                 )
 			mail.send()
 			#user = authenticate(username=username, password=password)
-			login(request, user, backend='django.contrib.auth.backends.ModelBackend')
+			login(request, request.user, backend='django.contrib.auth.backends.ModelBackend')
 			messages.success(request, 'Thank you for signing up. WELCOME!!!')
 			return redirect('/home')
 		else:
