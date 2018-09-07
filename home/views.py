@@ -71,7 +71,7 @@ def signup(request):
 			username = form.cleaned_data['username']
 			password = form.cleaned_data['password1']
 			email = form.cleaned_data['email']
-			user = authenticate(username=username, password=password)
+			#user = authenticate(username=username, password=password)
 			#login(request, user)
 			if form.cleaned_data['is_service_provider'] is True:
 				"""
@@ -80,7 +80,7 @@ def signup(request):
 				Should send an email to the superuser/staff to be vetting
 				"""
 				form.save()
-				login(request, user)
+				login(request, user, backend='django.contrib.auth.backends.ModelBackend')
 				messages.success(request,'You are signing up as a Service Provider. Complete the following...')
 				return redirect('home:service_registration')
 
@@ -100,7 +100,7 @@ def signup(request):
                                 )
 			mail.send()
 			#user = authenticate(username=username, password=password)
-			login(request, user)
+			login(request, user, backend='django.contrib.auth.backends.ModelBackend')
 			messages.success(request, 'Thank you for signing up. WELCOME!!!')
 			return redirect('/home')
 		else:
