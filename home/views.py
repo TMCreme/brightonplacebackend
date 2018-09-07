@@ -163,7 +163,7 @@ def edit_profile(request):
 			user_form.save(commit=False)
 			if form.is_valid():
 				#Call (by filter) the userprofile for updating
-				user_update = UserProfile.objects.filter(user__username=request.user)
+				user_update = UserProfile.objects.get(user__username=request.user)
 				#Use the cleaned data of the form to update 
 				user_update.phone_number = form.cleaned_data['phone_number']
 				user_update.bio = form.cleaned_data['bio']
