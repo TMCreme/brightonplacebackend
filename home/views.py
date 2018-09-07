@@ -165,17 +165,15 @@ def edit_profile(request):
 				#Call (by filter) the userprofile for updating
 				user_update = UserProfile.objects.filter(user__username=request.user)
 				#Use the cleaned data of the form to update 
-				user_update.update(phone_number=form.cleaned_data['phone_number'])
-				user_update.update(bio=form.cleaned_data['bio'])
-				user_update.update(website=form.cleaned_data['website'])
-				user_update.update(city=form.cleaned_data['city'])
-				user_update.update(country=form.cleaned_data['country'])
-				user_update.update(organization=form.cleaned_data['organization'])
-				user_update.update(occupation=form.cleaned_data['occupation'])
-				if form.cleaned_data['profile_picture']:
-					user_update.update(profile_picture=form.cleaned_data['profile_picture'])
-				else:
-					user_update.update(profile_picture=user.profile_picture)
+				user_update.phone_number = form.cleaned_data['phone_number']
+				user_update.bio = form.cleaned_data['bio']
+				user_update.website = form.cleaned_data['website']
+				user_update.city = form.cleaned_data['city']
+				user_update.country = form.cleaned_data['country']
+				user_update.organization = form.cleaned_data['organization']
+				user_update.occupation = form.cleaned_data['occupation']
+				user_update.profile_picture = request.FILES.get('profile_picture', user.profile_picture)
+				user_update.save()
 				user_form.save()
 				#After updating, redirect to the user profile page
 				messages.success(request, 'You have successfully updated your profile. Thank you.')
