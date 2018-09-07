@@ -3,7 +3,7 @@
 
 {% block css %}
 <style>
-    .message{display: none}
+    #message{display: none}
 </style>
 {% endblock %}
 
@@ -40,10 +40,10 @@
 <div class="container">
     <div class="row user_profile_navbar" style="background-color: #2c2c54;">
         <div class="col-sm-3">
-            <a href="javascript:void(0)" id="sample"><div class="header" style="background-color: #d1ccc0;">Sample</div></a>            
+            <a href="javascript:void(0)" onclick="sampleToggle()"><div class="header" style="background-color: #d1ccc0;">Sample</div></a>            
         </div>
         <div class="col-sm-3">
-            <a href="javasscript:void(0)" onclick="messagetoggle()" id="message"><div class="header" style="background-color: #2c2c54;">Messages</div></a>
+            <a href="javasscript:void(0)" onclick="messageToggle()"><div class="header" style="background-color: #2c2c54;">Messages</div></a>
         </div>
         <div class="col-sm-3">
             <a href="javascript:void(0)"><div class="header" style="background-color: #2c2c54;">Account</div></a>
@@ -52,7 +52,7 @@
             <a href="#"><div class="header" style="background-color: #2c2c54;">Reviews</div></a>
         </div>
     </div>
-    <div class="row">
+    <div class="row" id="sample">
         <div class="col-xs-6 sample" style="margin-right: 30px; overflow-x: hidden">
             <div class="row sample">
                 {% if sampleprojs %}
@@ -70,28 +70,36 @@
                 {% endif %}
                 
             </div>
-            
-            
+            <p><a href="#" style="">Click here </a>to post some of your work to help potential clients find you easily</p>            
         </div>
             
     </div>
-    <div class="row">
-        <div class="col-xs-6" style="margin-right: 30px; ">
-            <div class="row message">
-                {% if mesages %}
-                    {% for projs in mesages %}
-                        {% if projs.fromUser == request.user %}
-                            <li><a href="#">{{ projs.toUser }}</a></li>
-                        {% else %}
-                            <li><a href=#>{{ projs.fromUser }}</a></li>
+    <div class="row" id="message">
+        {% if mesages %}
+                <div class="" id="" style="display: block">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Receipient</th>
+                                <th>Message</th>
+                                <th>Date Created</th>
+                            </tr>
+                        </thead>
+                        {% for projs in mesages %}
+                        <tr>
+                            {% if projs.fromUser == request.user %}
+                            <td><a href="javascript:void(0)" onclick="toggleMessageDetail()">{{ projs.toUser }}</a></td>
+                            {% else %}
+                            <td><a href="javascript:void(0)" onclick="toggleMessageDetail()">{{ projs.fromUser }}</a></td>
                         {% endif %}
+                            <td>{{ projs.message }}</td>
+                            <td>{{ projs.createdAt }} </td>
+                        </tr>
                     {% endfor %}
-                {% endif %}
-                
-            </div>
+                    </table>
+                </div>
             
-            
-        </div>
+        {% endif %}
             
     </div>
     
@@ -103,14 +111,33 @@
 
 <script>
    
-   function messagetoggle(){
-       $('.sample').css({display:none;});
-       $('.message').css({display:block});
-        
+   function messageToggle() {
+        document.getElementById('sample').style.display = 'none';
+        document.getElementById('message').style.display = 'block';
+        document.getElementById('review').style.display = 'none';
+        document.getElementById('account').style.display = 'none';
     }
-
-
     
+    function sampleToggle() {
+        document.getElementById('sample').style.display = 'block';
+        document.getElementById('message').style.display = 'none';
+        document.getElementById('review').style.display = 'none';
+        document.getElementById('account').style.display = 'none';
+    }
+    
+    function accountToggle() {
+        document.getElementById('sample').style.display = 'none';
+        document.getElementById('message').style.display = 'none';
+        document.getElementById('review').style.display = 'none';
+        document.getElementById('account').style.display = 'block';
+    }
+    
+    function reviewToggle() {
+        document.getElementById('sample').style.display = 'none';
+        document.getElementById('message').style.display = 'none';
+        document.getElementById('review').style.display = 'block';
+        document.getElementById('account').style.display = 'none';
+    }
 
 
 </script>
