@@ -119,6 +119,13 @@ def serviceregistration(request):
 			print(serv_reg)
 			#Send the email confirmation to the user and self including the services chosen
 			#service_form.save()
+			"""mail = EmailMessage(
+					'Welcome Message from the Team',
+					"Hi "+username+", Thank you for signing up with brighton. We also acknowledge your request to be a service provider. Your credentials will be vetted and response communicated to you as soon as possible. Should we require additional information, we will contact you. Thanks once again.",
+					settings.EMAIL_HOST_USER,
+                    [email],
+					)
+			mail.send()"""
 			messages.success(request,'You have successfully applied for service provider status. Your credentials will be vetted and feedback sent to you by email.')
 			return redirect('home:profile')
 		else:
@@ -232,8 +239,20 @@ def sendmessageview(request, id):
 	if request.method == 'POST':
 		message_form = MessageInboxForm(request.POST)
 		if message_form.is_valid():
+			subject = message_form.cleaned_data['subject']
+			email = receiving_user.email
+			message = message_form.cleaned_data['message']
+			image = message_form.cleaned_data['image']
 			#Clean the form data and send email
 			message_form.save()
+			mail = EmailMessage(
+				'You have a message with the subject: '+subject,
+				"Hi "+username+",\n "+request.user+" sent you a message. Please find below the message. \n"+message,
+                settings.EMAIL_HOST_USER,
+                [email],
+				)
+			mail.attach(image.name, image.read(), image.content_type)
+			mail.send()
 			messages.success(request,'Your message has been sent. We will notify you as soon as there is a reply.')
 			return redirect('home:profile')
 		else:

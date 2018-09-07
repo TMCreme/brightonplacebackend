@@ -24,44 +24,6 @@
 </div>
 
 
-
-<div class="container" style="margin: 30px; 40px; 20px;">
-    <div class="row">
-        <div class="col-xs-6" style="margin-right: 50px">
-            {% if posted_project.image %}
-                    <img class="img-fluid" src="{{ posted_project.image.url }}" style="width: 250px; height: 250px;">
-                {% else %}
-                    <img src="{% static 'home/no_image.png' %}" style="width: 250px; height: 250px;">
-                {% endif %}
-            <p>{{ posted_project.client }}</p>
-            <p>{{ posted_project.title }}</p>
-            <p>{{ posted_project.category }}</p>
-            <p>{{ posted_project.service }}</p>
-        </div>
-        <div class="col" >
-            <div class="col-xs-3" style="margin-left: 30px; float: right; ">
-                <h5><a href="javascript:void(0)" onclick="bidtoggle('bid_form')" style="font-size: 4vw; background-color: #5f27cd; color: white" class="bidclass">PLACE A BID </a></h5>
-            </div>
-        </div>
-        
-        
-    </div>
-     
-</div>
-<div class="container">
-    <div class="header">Existing Bids</div>
-    <div class="row">
-        {% for bids in existing_bids %}
-            
-        <div class="col" style="border-color: blue">
-            <p>Bidder: {{ bids.bidder }}</p>
-            <p>Description:  {{ bids.description }} </p>
-            <p>Cost: GH¢ {{ bids.total_cost }}</p>
-        </div>
-        {% endfor %}
-    </div>
-</div>
-
 <div class="container" >
 	<div class="header">Bid here</div>
     <div class="row bidding_form" id="bid_form">
@@ -136,6 +98,52 @@
             </form>
         </div>
 </div>
+
+
+
+
+<div class="container" style="margin: 30px; 40px; 20px;">
+    <div class="row">
+        <div class="col-xs-6" style="margin-right: 50px">
+            {% if posted_project.image %}
+                    <img class="img-fluid" src="{{ posted_project.image.url }}" style="width: 250px; height: 250px;">
+                {% else %}
+                    <img src="{% static 'home/no_image.png' %}" style="width: 250px; height: 250px;">
+                {% endif %}
+            <p>{{ posted_project.client }}</p>
+            <p>{{ posted_project.title }}</p>
+            <p>{{ posted_project.category }}</p>
+            <p>{{ posted_project.service }}</p>
+        </div>
+        <div class="col" >
+            <div class="col-xs-3" style="margin-left: 30px; float: right; ">
+                <h5><a href="javascript:void(0)" onclick="bidtoggle('bid_form')" style="font-size: 4vw; background-color: #5f27cd; color: white" class="bidclass">PLACE A BID </a></h5>
+            </div>
+        </div>
+        
+        
+    </div>
+     
+</div>
+<div class="container">
+    <div class="header">Existing Bids</div>
+    <div class="row">
+        {% for bids in existing_bids %}
+            
+        <div class="col" style="border-color: blue">
+            <p>Bidder: {{ bids.bidder }}</p>
+            <p>Description:  {{ bids.description }} </p>
+            <p>Cost: GH¢ {{ bids.total_cost }}</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+
+
+
+
 
 
 <script>
