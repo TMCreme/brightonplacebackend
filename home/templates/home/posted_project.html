@@ -111,10 +111,10 @@
                 {% else %}
                     <img src="{% static 'home/no_image.png' %}" style="width: 250px; height: 250px;">
                 {% endif %}
-            <p>{{ posted_project.client }}</p>
+            <!--p>{{ posted_project.client }}</p-->
             <p>{{ posted_project.title }}</p>
-            <p>{{ posted_project.category }}</p>
-            <p>{{ posted_project.service }}</p>
+            <p>{{ posted_project.category }} - {{ posted_project.service }}</p>
+            <p>{{ posted_project.description }} </p>
         </div>
         <div class="col" >
             <div class="col-xs-3" style="margin-left: 30px; float: right; ">
