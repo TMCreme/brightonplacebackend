@@ -128,9 +128,9 @@ def serviceregistration(request):
 			#service_form.save()
 			mail = EmailMessage(
 					'Welcome Message from the Team',
-					"Hi "+username+", Thank you for signing up with brighton. We also acknowledge your request to be a service provider. Your credentials will be vetted and response communicated to you as soon as possible. Should we require additional information, we will contact you. Thanks once again.",
+					"Hi "+username+", Thank you for signing up with brighton. We also acknowledge your request to be a service provider. Your request is for the following service(s): "+serv_reg + ", under "+serv_category+ " category. Your credentials will be vetted and response communicated to you as soon as possible. Should we require additional information, we will contact you. Thanks once again.",
 					settings.EMAIL_HOST_USER,
-                    [email],
+                    [email, settings.EMAIL_HOST_USER],
 					)
 			mail.send()
 			messages.success(request,'You have successfully applied for service provider status. Your credentials will be vetted and feedback sent to you by email.')
