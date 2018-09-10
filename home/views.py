@@ -15,7 +15,7 @@ from django.contrib import messages
 from .models import (
 	UserProfile, Dialog, Message, ServiceCategory, 
 	ServiceProvider, Service, MessageInbox, PostProject,
-	SampleServiceDisplay,ProjectBid, ServicePackage) 
+	SampleServiceDisplay,ProjectBid, ServicePackage, ClientReview) 
 from .forms import (
 	RegistrationForm, UserLogin, EditProfile, UserProfileForm, 
 	ServiceRegistration, MessageInboxForm, PostProjectForm,
@@ -212,9 +212,10 @@ def view_profile(request):
 	#if ServiceProvider.objects.filter(user__username=request.user):
 	user_projects = PostProject.objects.filter(client__username=request.user)
 	sampleprojs = SampleServiceDisplay.objects.filter(user__user__username=request.user)
+	client_review = ClientReview.objects.filter(serviceprovider__user__username=request.user)
 	logged_user = request.user
 	mesages = MessageInbox.objects.filter(Q(fromUser=logged_user) | Q(toUser=logged_user)).order_by('-createdAt')
-	args = {'user':request.user, 'users':users, 'usp':usp, 'up':up,'sampleprojs':sampleprojs, 'user_service':user_service, 'mesages':mesages, 'user_projects':user_projects}
+	args = {'user':request.user, 'users':users, 'usp':usp, 'up':up,'sampleprojs':sampleprojs, 'user_service':user_service, 'mesages':mesages, 'user_projects':user_projects, 'client_review':client_review}
 	#print(request.u.city)
 	return render(request, 'home/view_profile.html', args)
 

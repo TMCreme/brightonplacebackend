@@ -4,6 +4,7 @@
 {% block css %}
 <style>
     #message{display: none}
+	#review{display: none}
 </style>
 {% endblock %}
 
@@ -102,6 +103,33 @@
 		{% else %}
             <p>You have no messages at this time</p>
             
+        {% endif %}
+            
+    </div>
+	
+	<div class="row" id="review">
+        {% if client_review %}
+                <div class="" id="" style="display: block">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Client</th>
+                                <th>Transaction ID</th>
+                                <th>Review</th>
+                            </tr>
+                        </thead>
+                        {% for projs in client_review %}
+                        <tr class="">
+                            <td> {{ projs.user }}</td>                        
+                            <td>{{ projs.transaction_id }}</td>
+                            <td>{{ projs.review }} </td>
+                        </tr>
+                    {% endfor %}
+                        <tr></tr>
+                    </table>
+                </div>
+        {% else %}
+            <p>You have no reviews at this time. After you have completed a work, then your client can post a review about the work.</p>
         {% endif %}
             
     </div>
