@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'storages',
+    #'storages',
     'widget_tweaks',
     'crispy_forms',
     'multiselectfield',
@@ -138,16 +138,16 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
-"""
+
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 
-MEDIA_URL = 'https://s3.us-east-2.amazonaws.com/dziedzormdelasi/'
+#MEDIA_URL = 'https://s3.us-east-2.amazonaws.com/dziedzormdelasi/'
 
-MEDIA_ROOT = "https://s3.us-east-2.amazonaws.com/dziedzormdelasi/")
+#MEDIA_ROOT = "https://s3.us-east-2.amazonaws.com/dziedzormdelasi/")
 """
 
 
@@ -173,7 +173,7 @@ MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, AWS_MEDIA_LOCATION)
 MEDIA_ROOT = MEDIA_URL
 
 DEFAULT_FILE_STORAGE = 'myproject.storage_backends.MediaStorage'
-
+"""
 
 
 
