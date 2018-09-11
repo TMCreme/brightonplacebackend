@@ -298,6 +298,8 @@ def postprojectview(request):
 
 	return render(request, 'home/postproject.html', args)
 
+
+
 #For those service providers that want to display their work
 @login_required
 def sampleprojectdisplayview(request):
