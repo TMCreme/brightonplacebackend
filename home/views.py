@@ -323,6 +323,7 @@ def sampleprojectdisplayview(request):
 #This is to display all of the service provider's samples
 def serviceview(request, slug):
 	servicepage = SampleServiceDisplay.objects.filter(service__slug=slug)
+	#user_profile = Service.objects.filter(name=slug).values_list()
 	args = {'servicepage':servicepage, 'slug':slug}
 	return render(request, 'home/service_page.html', args)
 
