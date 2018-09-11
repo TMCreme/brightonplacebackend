@@ -306,7 +306,7 @@ def sampleprojectdisplayview(request):
 	data = {'user':request.user}
 	sampleproject_form = SampleServiceDisplayForm(initial=data)
 	if request.method == 'POST':
-		sampleproject_form = SampleServiceDisplayForm(request.POST, request.FILES, instance=)
+		sampleproject_form = SampleServiceDisplayForm(request.POST, request.FILES, instance=data)
 		#TODO: Add the logic that allows only service_providers
 		if ServiceProvider.objects.filter(user=request.user).exists():
 			if sampleproject_form.is_valid():
