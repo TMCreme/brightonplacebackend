@@ -303,9 +303,10 @@ def postprojectview(request):
 #For those service providers that want to display their work
 @login_required
 def sampleprojectdisplayview(request):
-	sampleproject_form = SampleServiceDisplayForm(initial={'user':request.user})
+	data = {'user':request.user}
+	sampleproject_form = SampleServiceDisplayForm(initial=data)
 	if request.method == 'POST':
-		sampleproject_form = SampleServiceDisplayForm(request.POST, request.FILES)
+		sampleproject_form = SampleServiceDisplayForm(request.POST, request.FILES, instance=)
 		#TODO: Add the logic that allows only service_providers
 		if ServiceProvider.objects.filter(user=request.user).exists():
 			if sampleproject_form.is_valid():
