@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    #'storages',
+    'storages',
     'widget_tweaks',
     'crispy_forms',
     'multiselectfield',
@@ -138,7 +138,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
-
+"""
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 STATIC_URL = '/static/'
@@ -148,9 +148,9 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 #MEDIA_URL = 'https://s3.us-east-2.amazonaws.com/dziedzormdelasi/'
 
 #MEDIA_ROOT = "https://s3.us-east-2.amazonaws.com/dziedzormdelasi/")
-"""
+~~~~~~~~~~
 
-
+#Amazon AWS s3 configuration
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
@@ -174,6 +174,30 @@ MEDIA_ROOT = MEDIA_URL
 
 DEFAULT_FILE_STORAGE = 'myproject.storage_backends.MediaStorage'
 """
+
+#Microsoft azure configuration
+DEFAULT_FILE_STORAGE = 'storages.backends.azure_storage.AzureStorage'
+AZURE_ACCOUNT_NAME = "brightonplace"
+
+AZURE_ACCOUNT_KEY = '5khXI61UI8z92feb7r8LZoksn8BROeS2RdFujW9WQCP+qBqCHTW9shInhJuyaItNlc9Lm2RKNiphsUwrIH1Daw=='
+
+AZURE_CONTAINER = 'media'
+
+MEDIA_ROOT = "https:brightonplace.blob.core.windows.net"
+
+MEDIA_URL = "https:brightonplace.blob.core.windows.net/media"
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
