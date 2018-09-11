@@ -30,7 +30,7 @@ EMAIL_USE_TLS = True
 SECRET_KEY = '%kn*hytw!ta295w_5a*kwr)$vlk0)26y9nmw9%)-06tnr@1d&)'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['brightonplace.herokuapp.com']
 
@@ -177,12 +177,14 @@ DEFAULT_FILE_STORAGE = 'myproject.storage_backends.MediaStorage'
 
 #Microsoft azure configuration
 DEFAULT_FILE_STORAGE = 'storages.backends.azure_storage.AzureStorage'
+STATICFILES_STORAGE = 'storages.backends.azure_storage.AzureStorage'
 AZURE_ACCOUNT_NAME = "brightonplace"
 
 AZURE_ACCOUNT_KEY = '5khXI61UI8z92feb7r8LZoksn8BROeS2RdFujW9WQCP+qBqCHTW9shInhJuyaItNlc9Lm2RKNiphsUwrIH1Daw=='
 
 AZURE_CONTAINER = 'media'
 
+STATIC_URL = "https:brightonplace.blob.core.windows.net/static"
 MEDIA_ROOT = "https:brightonplace.blob.core.windows.net"
 
 MEDIA_URL = "https:brightonplace.blob.core.windows.net/media"
