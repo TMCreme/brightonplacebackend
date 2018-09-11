@@ -256,7 +256,7 @@ def sendmessageview(request, id):
 			message_form.save()
 			mail = EmailMessage(
 				'You have a message with the subject: '+subject,
-				"Hi "+username+",\n "+request.user+" sent you a message. Please find below the message. \n"+message,
+				"Hi "+receiving_user+",\n "+request.user+" sent you a message. Please find below the message. \n"+message,
                 settings.EMAIL_HOST_USER,
                 [email],
 				)
@@ -305,8 +305,10 @@ def postprojectview(request):
 def sampleprojectdisplayview(request):
 	data = {'user':request.user}
 	sampleproject_form = SampleServiceDisplayForm(initial=data)
+	for item in request:
+		print(item)
 	if request.method == 'POST':
-		sampleproject_form = SampleServiceDisplayForm(request.POST, request.FILES, instance=data)
+		sampleproject_form = SampleServiceDisplayForm(request.POST, request.FILES)
 		#TODO: Add the logic that allows only service_providers
 		if ServiceProvider.objects.filter(user=request.user).exists():
 			if sampleproject_form.is_valid():
