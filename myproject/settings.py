@@ -182,7 +182,7 @@ AZURE_ACCOUNT_NAME = "brightonplace"
 
 AZURE_ACCOUNT_KEY = '5khXI61UI8z92feb7r8LZoksn8BROeS2RdFujW9WQCP+qBqCHTW9shInhJuyaItNlc9Lm2RKNiphsUwrIH1Daw=='
 
-AZURE_CONTAINER = 'media'
+AZURE_CONTAINER = 'static'
 
 STATIC_URL = "https:brightonplace.blob.core.windows.net/static"
 MEDIA_ROOT = "https:brightonplace.blob.core.windows.net"
