@@ -2,7 +2,7 @@
 
 {% block css %}
 <style>
-    #id_user{display: none}
+    #service_user{display: none}
 </style>
 {% endblock %}
 
@@ -26,8 +26,8 @@
     <form method="post" class="mx-auto" enctype="multipart/form-data">
         {% csrf_token %}
         
-        <div class="form-group row">
-            <!--label for="colFormLabel" class="col-sm-2 col-form-label">User</label-->
+        <div class="form-group row" d="service_user">
+            <label for="colFormLabel" class="col-sm-2 col-form-label">User</label>
             <div class="col-sm-10">
                 {{ sampleproject_form.user | add_class:"css_class" | attr:"placeholder:User" }}
             </div>
