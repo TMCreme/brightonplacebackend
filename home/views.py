@@ -305,8 +305,8 @@ def postprojectview(request):
 def sampleprojectdisplayview(request):
 	data = {'user':request.user}
 	sampleproject_form = SampleServiceDisplayForm(initial=data)
-	for item in request:
-		print(item)
+	for key, value in request.GET:
+		print(key, value)
 	if request.method == 'POST':
 		sampleproject_form = SampleServiceDisplayForm(request.POST, request.FILES)
 		#TODO: Add the logic that allows only service_providers
