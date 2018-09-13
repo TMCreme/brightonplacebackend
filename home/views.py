@@ -211,7 +211,7 @@ def view_profile(request):
 	#sampleprojs = get_object_or_404(SampleServiceDisplay, user__username=request.user)
 	#if ServiceProvider.objects.filter(user__username=request.user):
 	user_projects = PostProject.objects.filter(client__username=request.user)
-	sampleprojs = SampleServiceDisplay.objects.filter(user__user__username=request.user)
+	sampleprojs = SampleServiceDisplay.objects.filter(user__username=request.user)
 	client_review = ClientReview.objects.filter(serviceprovider__user__username=request.user)
 	logged_user = request.user
 	mesages = MessageInbox.objects.filter(Q(fromUser=logged_user) | Q(toUser=logged_user)).order_by('-createdAt')
@@ -236,7 +236,7 @@ def userdashboard(request, id):
 	resulted_user_profile = UserProfile.objects.get(user__username=resulted_user)
 	service_package = ServicePackage.objects.filter(serviceprovider__user__username=resulted_user)[:3]
 	resulted_user_service = PostProject.objects.filter(serviceprovider__user__username=resulted_user, completed=True)[:5]
-	sample_work = SampleServiceDisplay.objects.filter(user__user__username=resulted_user)
+	sample_work = SampleServiceDisplay.objects.filter(user__username=resulted_user)
 	args = {'resulted_user':resulted_user,'resulted_user_profile':resulted_user_profile,'service_package':service_package, 'resulted_user_service':resulted_user_service, 'sample_work':sample_work}
 	return render(request, 'home/user_dashboard.html', args)
 
