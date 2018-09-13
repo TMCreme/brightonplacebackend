@@ -126,7 +126,7 @@ class PostProject(models.Model):
 
 #Service providers adding sample to their dashboard for display
 class SampleServiceDisplay(models.Model):
-	user = models.ForeignKey(ServiceProvider, on_delete=models.CASCADE)
+	user = models.ForeignKey(User, on_delete=models.CASCADE)
 	servicecategory = models.ForeignKey(ServiceCategory, on_delete=models.CASCADE)
 	service = models.ForeignKey(Service, on_delete=models.CASCADE)
 	search_tags = models.CharField(max_length=500, blank=True)
