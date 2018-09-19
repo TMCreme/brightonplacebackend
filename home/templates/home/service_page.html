@@ -34,7 +34,7 @@
     <div class="row">
         {% for sampserv in servicepage %}
         <div class="border border-light col-6 col-md-3" style="margin: 10px 5px 10px 15px;">
-            <a href="{% url 'home:userdashboard' sampserv.user.user.id %}"><img src="{{ sampserv.sample_image.url }}" class="img-thumbnal img-fluid" ></a>
+            <a href="{% url 'home:userdashboard' sampserv.user.id %}"><img src="{{ sampserv.sample_image.url }}" class="img-thumbnal img-fluid" ></a>
             <p>Category: {{ sampserv.servicecategory.name }}</p>
             <p>{{ sampserv.service.name }}</p>
             <p>{{ sampserv.user.username }}</p>

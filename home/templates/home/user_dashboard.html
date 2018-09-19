@@ -138,7 +138,7 @@
                             <td>{{ services.servicecategory.name }}</td>
                             <td>{{ services.service.name }} </td>
                             <td>{{ services.description }} </td>
-                            {% if services.image %}
+                            {% if services.sample_image %}
                             <td><img src="{{ services.sample_image.url }}" width="100px" height="100px" ></td>
                             {% else %}
                             <td><img src="{% static 'home/no_image.png' %}" width="100px" height="100px"></td>
