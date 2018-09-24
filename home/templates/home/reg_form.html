@@ -23,13 +23,18 @@
                     </div>
                 </div>
                 <div class="col-sm-12">
-					<p>Password must be 8 characters or more including 2 or more of the following</p>
                     <div class="form-group floating-label">
                         <!--label for="regular2">Email Address</label-->
                         {{ form.email | add_class:"css_class" | attr:"placeholder:email address" }}      
                     </div>
                 </div>
                 <div class="col-sm-12">
+					<p>Password must be 8 characters or more including 2 or more of the following</p>
+					<ul>
+						<li>Letters (a,b,f,t)</li>
+						<li>Numbers (1,2,3,4,56,9)</li>
+						<li>Special Characters (!,%,#,&,*)</li>
+					</ul>
                     <div class="form-group floating-label">
                         <!--label for="regular2">Password</label-->
                         {{ form.password1 | add_class:"css_class" | attr:"placeholder:Password" }}
