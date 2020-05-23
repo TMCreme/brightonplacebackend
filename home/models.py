@@ -78,6 +78,9 @@ class Service(models.Model):
 	def __str__(self):
 		return self.name
 
+	class Meta:
+		ordering = ('name',)
+
 	
 
 	def get_absolute_url(self):
