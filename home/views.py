@@ -21,9 +21,33 @@ from .forms import (
 	ServiceRegistration, MessageInboxForm, PostProjectForm,
 	SampleServiceDisplayForm, ProjectBidForm, ServicePackageForm)
 from django.utils.safestring import mark_safe
+
+from myproject.settings import SECRET_KEY
+from django.contrib.auth import login, logout, authenticate
+from .serializers import (
+	UserSerializer, ServiceSerializer, ServiceCategorySerializer,
+	SampleServiceDisplaySerializer,
+)
 import json
 import string
 import random
+
+# Rest framework imports for REST API for mobile side
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework import generics, mixins, status, viewsets
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from rest_framework.permissions import BasePermission, IsAuthenticated, AllowAny
+from rest_framework.authtoken.models import Token
+from rest_framework.generics import CreateAPIView
+from rest_framework_jwt.settings import api_settings
+from rest_framework.decorators import api_view, permission_classes
+import jwt
+
+jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
+jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
+
 
 
 """
@@ -55,10 +79,129 @@ def indexView(request):
 		
 	return render(request, 'home/index.html', {'user_login_form':user_login_form})
 
+# REST API for login
+
+class LoginUserView(APIView):
+
+    def post(self, request, *args, **kwargs):
+        username = request.data.get('username')
+        password = request.data.get('password')
+
+        user = authenticate(username=username, password=password)
+        if user:
+            payload = jwt_payload_handler(user)
+            print(request.META.get('headers'))
+            token = {
+                'token': jwt.encode(payload, SECRET_KEY),
+                'status': 'success'
+                }
+            print(token)
+            return Response(token)
+        else:
+            return Response(
+              {'error': 'Invalid credentials',
+              'status': 'failed'},
+            )
+
+# REST API LOGOUT VIEW
+class LogoutAPIView(APIView):
+	permission_classes = (IsAuthenticated,)
+
+	def post(self,request):
+		print(request.user.id)
+		request.data.pop('auth_token')
+		return Response({'status':'success'})
+
+
 #Service, ServiceCategory should be taken to the context processor
 def serviceview(request):
 	service = Service.objects.all()
 	return render(request, 'home/service_search.html',)
+
+
+
+# LIST API VIEW for Users - This view will be edited later to get only people a user has chat history with
+class UserChatAPIView(generics.ListAPIView):
+	queryset = User.objects.all()
+	serializer_class = UserSerializer
+
+@api_view(['POST'])
+@permission_classes((AllowAny,))
+def create_user(request):
+	serialized = UserSerializer(data=request.data)
+	if serialized.is_valid():
+		serialized.save()
+		username = request.data.get('username') 
+		password = request.data.get('password')
+		user = authenticate(username=username, password=password)
+		payload = jwt_payload_handler(user)
+		token = {
+                'token': jwt.encode(payload, SECRET_KEY),
+                'status': 'success'
+                }
+		return Response(token, status=status.HTTP_201_CREATED)
+	else:
+		return Response(serialized.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+
+# Service Category REST API
+class ServiceCategoryAPIView(mixins.CreateModelMixin, generics.ListAPIView):
+	queryset = ServiceCategory.objects.all()
+	serializer_class = ServiceCategorySerializer
+
+	def post(self, request, *args, **kwargs):
+		return self.create(request, *args, **kwargs)
+
+	def get_serializer_context(self, *args, **kwargs):
+		return {"request":self.request}
+
+# Service REST API for post and get
+class ServiceView(mixins.CreateModelMixin, generics.ListAPIView):
+	queryset = Service.objects.all()
+	serializer_class = ServiceSerializer
+
+	def post(self, request, *args, **kwargs):
+		return self.create(request, *args, **kwargs)
+
+	def get_serializer_context(self, *args, **kwargs):
+		return {"request":self.request}
+
+
+# Service listing by category order
+class ServicebyCategoryView(generics.ListCreateAPIView):
+	# queryset = ServiceCategory.objects.all()
+	serializer_class = ServiceSerializer
+	# lookup_url_kwarg = 'pk'
+
+	def get_queryset(self):
+		my_id = self.request.query_params.get('id')
+		print(my_id)
+		queryset = Service.objects.filter(servicecategory__id=my_id)
+		print(queryset)
+		return queryset
+
+	def post(self, request, *args, **kwargs):
+		return self.create(request, *args, **kwargs)
+
+	def get_serializer_context(self, *args, **kwargs):
+		return {"request":self.request}
+
+@api_view(['GET', 'POST'])
+def service_by_cat(request,id):
+	services = Service.objects.filter(servicecategory__id=id)
+	serializer = ServiceSerializer(services, many=True, context={"request": request})
+	return Response(serializer.data)
+
+
+@permission_classes((IsAuthenticated,))
+@api_view(['GET', 'POST'])
+def sampledisplay_by_service(request,id):
+	services = SampleServiceDisplay.objects.filter(service__id=id)
+	serializer = SampleServiceDisplaySerializer(services, many=True, context={"request": request})
+	return Response(serializer.data)
+
 
 #Simple sign up -- thinking of including an option to be a service provider
 #In which case if user applies to be a service provider, then authentication will be deferred until approval from a SUPERUSER

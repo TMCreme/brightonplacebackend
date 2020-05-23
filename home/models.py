@@ -33,6 +33,16 @@ def create_profile(sender, **kwargs):
 post_save.connect(create_profile, sender=User)
 
 
+class UserLocation(models.Model):
+	user = models.ForeignKey(User, on_delete=models.CASCADE)
+	region = models.CharField(max_length=250, null=True, blank=True)
+	district = models.CharField(max_length=250, null=True, blank=True)
+	locality = models.CharField(max_length=250, null=True, blank=True)
+	latitude = models.DecimalField(max_digits=20, decimal_places=8, null=True, blank=True)
+	longitude = models.DecimalField(max_digits=20, decimal_places=8, null=True, blank=True)
+	description = models.CharField(max_length=200, null=True, blank=True)
+
+
 class ServiceCategory(models.Model):
 	name = models.CharField(max_length=250, db_index=True)
 	slug = models.SlugField(max_length=250, db_index=True, unique=True)
@@ -50,7 +60,7 @@ class ServiceCategory(models.Model):
 		return reverse('home:servicecategory', args=[self.slug])
 
 class ServiceProvider(models.Model):
-	user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+	user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
 
 	def __str__(self):
 		return self.user.username
@@ -58,15 +68,17 @@ class ServiceProvider(models.Model):
 
 class Service(models.Model):
 	servicecategory = models.ForeignKey(ServiceCategory, on_delete=models.CASCADE)
-	serviceprovider = models.ManyToManyField(ServiceProvider)
+	serviceprovider = models.ManyToManyField(ServiceProvider, null=True, blank=True)
 	date = models.DateTimeField(auto_now_add=True)
 	name = models.CharField(max_length=250)
 	slug = models.SlugField(max_length=250, db_index=True)
 	description = models.TextField()
-	sample_image = models.ImageField(blank=True, upload_to='home')
+	sample_image = models.ImageField(blank=True, null=True, upload_to='home')
 
 	def __str__(self):
 		return self.name
+
+	
 
 	def get_absolute_url(self):
 		return reverse('home:detail', args=[self.id, self.slug])
@@ -135,6 +147,14 @@ class SampleServiceDisplay(models.Model):
 
 	def __str__(self):
 		return self.service.name
+
+	@property
+	def service_name(self):
+		return self.service.name
+	
+	@property
+	def user_name(self):
+		return self.user.username
 
 	def get_absolute_url(self):
 		return reverse('home:postedsample', args=[self.id, self.slug])
