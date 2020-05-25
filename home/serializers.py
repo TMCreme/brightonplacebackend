@@ -27,25 +27,25 @@ class ServiceCategorySerializer(serializers.ModelSerializer):
     id = serializers.ReadOnlyField()
     
     class Meta:
-		model = ServiceCategory
-		fields = '__all__'
-		extra_kwargs = {'id': {'read_only': False}}
+        model = ServiceCategory
+        fields = '__all__'
+        extra_kwargs = {'id': {'read_only': False}}
 
 class ServiceProviderSerializer(serializers.ModelSerializer):
     id = serializers.ReadOnlyField()
     
     class Meta:
-		model = ServiceProvider
-		fields = '__all__'
-		extra_kwargs = {'id': {'read_only': False}}
+        model = ServiceProvider
+        fields = '__all__'
+        extra_kwargs = {'id': {'read_only': False}}
 
 
 class ServiceSerializer(serializers.ModelSerializer):
     id = serializers.ReadOnlyField()
     class Meta:
-		model = Service
-		fields = '__all__'
-		extra_kwargs = {'id': {'read_only': False}}
+        model = Service
+        fields = '__all__'
+        extra_kwargs = {'id': {'read_only': False}}
 
 
 
