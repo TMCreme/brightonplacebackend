@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.models import User
 from .models import (
 	UserProfile, ServiceCategory, ServiceProvider, Service, MessageInbox,
-	PostProject, SampleServiceDisplay, ProjectBid, ServicePackage, ClientReview)
+	PostProject, SampleServiceDisplay, ProjectBid, ServicePackage, ClientReview, UserLocation)
 #from .forms import UserProfile
 
 
@@ -61,7 +61,7 @@ class ClientReviewAdmin(admin.ModelAdmin):
 admin.site.register(ClientReview, ClientReviewAdmin)
 
 
-
+admin.site.register(UserLocation)
 
 
 

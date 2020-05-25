@@ -24,20 +24,25 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class ServiceCategorySerializer(serializers.ModelSerializer):
-	class Meta:
+    id = serializers.ReadOnlyField()
+    
+    class Meta:
 		model = ServiceCategory
-		fields = ['name','image']
+		fields = '__all__'
 		extra_kwargs = {'id': {'read_only': False}}
 
 class ServiceProviderSerializer(serializers.ModelSerializer):
-	class Meta:
+    id = serializers.ReadOnlyField()
+    
+    class Meta:
 		model = ServiceProvider
-		fields = ['user']
+		fields = '__all__'
 		extra_kwargs = {'id': {'read_only': False}}
 
 
 class ServiceSerializer(serializers.ModelSerializer):
-	class Meta:
+    id = serializers.ReadOnlyField()
+    class Meta:
 		model = Service
 		fields = '__all__'
 		extra_kwargs = {'id': {'read_only': False}}
