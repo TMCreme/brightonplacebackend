@@ -64,7 +64,7 @@ class ServiceCategory(models.Model):
 		return reverse('home:servicecategory', args=[self.slug])
 
 class ServiceProvider(models.Model):
-	user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+	user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
 
 	def __str__(self):
 		return self.user.username
