@@ -26,7 +26,7 @@ from myproject.settings import SECRET_KEY
 from django.contrib.auth import login, logout, authenticate
 from .serializers import (
 	UserSerializer, ServiceSerializer, ServiceCategorySerializer,
-	SampleServiceDisplaySerializer,
+	SampleServiceDisplaySerializer, UserProfileSerializer
 )
 import json
 import string
@@ -82,23 +82,40 @@ def indexView(request):
 # REST API for login
 
 class LoginUserView(APIView):
-
-    def post(self, request, *args, **kwargs):
-        username = request.data.get('username')
-        password = request.data.get('password')
-
-        user = authenticate(username=username, password=password)
-        if user:
-            payload = jwt_payload_handler(user)
-            print(request.META.get('headers'))
-            token = {
+	
+	def post(self, request, *args, **kwargs):
+		username = request.data.get('username')
+		password = request.data.get('password')
+		
+		user = authenticate(username=username, password=password)
+		if user:
+			myuser = User.objects.get(username=username)
+			payload = jwt_payload_handler(user)
+			userprofile = UserProfile.objects.get(user__id=myuser.id)
+			print(request.META.get('headers'))
+			up_dict = {
+				'first_name': userprofile.first_name,
+				'last_name':userprofile.last_name,
+				'phone_number':userprofile.phone_number,
+				'bio':userprofile.bio,
+				'website':userprofile.website,
+				'city':userprofile.city,
+				'country':userprofile.country,
+				'location_latitude':userprofile.location_latitude,
+				'location_longitude':userprofile.location_longitude,
+				'occupation':userprofile.occupation,
+				'organization':userprofile.organization,
+				'profile_picture':str(userprofile.profile_picture)
+			}
+			token = {
                 'token': jwt.encode(payload, SECRET_KEY),
+				'userprofile':jwt.encode(up_dict, SECRET_KEY),
                 'status': 'success'
                 }
-            print(token)
-            return Response(token)
-        else:
-            return Response(
+			print(token)
+			return Response(token)
+		else:
+			return Response(
               {'error': 'Invalid credentials',
               'status': 'failed'},
             )
@@ -120,10 +137,13 @@ def serviceview(request):
 
 
 
-# LIST API VIEW for Users - This view will be edited later to get only people a user has chat history with
+# LIST API VIEW for Users - This view will be edited later to get only people a user has chat history with - This is done in ionic with Firebase
+# Chat is stored in Firebase
 class UserChatAPIView(generics.ListAPIView):
 	queryset = User.objects.all()
 	serializer_class = UserSerializer
+
+
 
 @api_view(['POST'])
 @permission_classes((AllowAny,))

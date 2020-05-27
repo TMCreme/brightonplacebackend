@@ -2,7 +2,7 @@ from django.contrib.auth.models import User, Group
 from rest_framework import serializers
 from .models import (
 	ServiceCategory, Service, ServiceProvider, ServicePackage, SampleServiceDisplay,
-	Message, MessageInbox, UserLocation
+	Message, MessageInbox, UserLocation, UserProfile
 )
 
 
@@ -11,7 +11,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
 	class Meta:
 		model = User
-		fields = ('username', 'email','password',)
+		fields = '__all__'
 		extra_kwargs = {'id': {'read_only': False}}
 
 
@@ -21,6 +21,17 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 		user.is_active = True
 		user.save()
 		return user
+
+
+class UserProfileSerializer(serializers.ModelSerializer):
+	id = serializers.ReadOnlyField()
+	username = serializers.CharField(source='user.username', read_only=True)
+	email = serializers.EmailField(source='user.email', read_only=True)
+
+	class Meta:
+		model = UserProfile
+		fields = '__all__'
+
 
 
 class ServiceCategorySerializer(serializers.ModelSerializer):

@@ -14,17 +14,21 @@ import random
 class UserProfile(models.Model):
 	user = models.OneToOneField(User, on_delete=models.CASCADE)
 	slug = models.SlugField(max_length=250,db_index=True)
-	phone_number = models.IntegerField(default=0)
+	first_name = models.CharField(max_length=250, blank=True, null=True)
+	last_name = models.CharField(max_length=250, blank=True, null=True)
+	phone_number = models.CharField(max_length=250, blank=True, null=True)
 	website = models.URLField(default='', blank=True)
 	bio = models.TextField(default='', blank=True)
 	city = models.CharField(max_length=300, default='', blank=True)
 	country = models.CharField(max_length=250, default='', blank=True)
+	location_latitude = models.DecimalField(max_digits=20, decimal_places=8, null=True, blank=True)
+	location_longitude = models.DecimalField(max_digits=20, decimal_places=8, null=True, blank=True)
 	occupation = models.CharField(max_length=300, default='', blank=True)
 	organization = models.CharField(max_length=300, default='',blank=True)
 	profile_picture = models.ImageField(upload_to='home', blank=True, null=True)
 
-	def __str__(self):
-		return self.user.username
+	def __unicode__(self):
+		return self.user
 
 def create_profile(sender, **kwargs):
 	if kwargs['created']:
