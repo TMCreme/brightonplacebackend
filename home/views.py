@@ -130,6 +130,12 @@ class LogoutAPIView(APIView):
 		return Response({'status':'success'})
 
 
+
+class UserProfileUpdateAPIView(generics.UpdateAPIView):
+	queryset = UserProfile.objects.all()
+	serializer_class = UserProfileSerializer 
+	lookup_field = 'user__id'
+
 #Service, ServiceCategory should be taken to the context processor
 def serviceview(request):
 	service = Service.objects.all()
