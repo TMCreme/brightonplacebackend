@@ -109,7 +109,7 @@ class LoginUserView(APIView):
 			}
 			token = {
                 'token': jwt.encode(payload, SECRET_KEY),
-				'userprofile':jwt.encode(up_dict, SECRET_KEY),
+				'userprofile':up_dict,
                 'status': 'success'
                 }
 			print(token)
