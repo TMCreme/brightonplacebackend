@@ -4,6 +4,7 @@ from .models import (
 	ServiceCategory, Service, ServiceProvider, ServicePackage, SampleServiceDisplay,
 	Message, MessageInbox, UserLocation, UserProfile
 )
+from drf_extra_fields.fields import Base64ImageField
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -27,6 +28,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
 	id = serializers.ReadOnlyField()
 	username = serializers.CharField(source='user.username', read_only=True)
 	email = serializers.EmailField(source='user.email', read_only=True)
+	profile_picture = Base64ImageField(required=False)
 
 	class Meta:
 		model = UserProfile
