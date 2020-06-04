@@ -16,6 +16,7 @@ urlpatterns = [
     path('api-user-chat/', views.UserChatAPIView.as_view(), name='api-user-chat'),
     path('api-register-user/', views.create_user, name='api-register-user'),
     path('api-update-user-profile/<int:user__id>/', views.UserProfileUpdateAPIView.as_view(), name='api-update-user-profile'),
+    path('api-service-registration/', views.ServiceRegistrationAPIView.as_view(), name='api-service-registration'),
     path('search_results/', views.searchview, name='search_results'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('signup/', views.signup, name='signup'),
