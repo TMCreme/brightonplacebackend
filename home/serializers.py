@@ -2,7 +2,7 @@ from django.contrib.auth.models import User, Group
 from rest_framework import serializers
 from .models import (
 	ServiceCategory, Service, ServiceProvider, ServicePackage, SampleServiceDisplay,
-	Message, MessageInbox, UserLocation, UserProfile
+	Message, MessageInbox, UserLocation, UserProfile, ServiceRegistration
 )
 from drf_extra_fields.fields import Base64ImageField
 
@@ -61,6 +61,13 @@ class ServiceSerializer(serializers.ModelSerializer):
         extra_kwargs = {'id': {'read_only': False}}
 
 
+
+class ServiceRegistrationSerializer(serializers.ModelSerializer):
+	id = serializers.ReadOnlyField()
+	class Meta:
+		model = ServiceRegistration
+		fields = '__all__' 
+		extra_kwargs = {'id':{'read_only':False}}
 
 
 class UserLocationSerializer(serializers.ModelSerializer):

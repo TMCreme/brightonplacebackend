@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.models import User
 from .models import (
-	UserProfile, ServiceCategory, ServiceProvider, Service, MessageInbox,
+	UserProfile, ServiceCategory, ServiceProvider, Service, MessageInbox, ServiceRegistration,
 	PostProject, SampleServiceDisplay, ProjectBid, ServicePackage, ClientReview, UserLocation)
 #from .forms import UserProfile
 
@@ -32,6 +32,10 @@ class ServiceProviderAdmin(admin.ModelAdmin):
 	list_display = ['user']
 admin.site.register(ServiceProvider, ServiceProviderAdmin)
 
+
+class ServiceRegistrationAdmin(admin.ModelAdmin):
+	list_display = ['date_created','user','servicecategory']
+admin.site.register(ServiceRegistration, ServiceRegistrationAdmin)
 
 class MessageInboxAdmin(admin.ModelAdmin):
 	list_display = ['createdAt','fromUser','toUser','subject','message']

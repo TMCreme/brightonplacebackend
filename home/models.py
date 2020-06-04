@@ -72,7 +72,7 @@ class ServiceProvider(models.Model):
 
 class Service(models.Model):
 	servicecategory = models.ForeignKey(ServiceCategory, on_delete=models.CASCADE)
-	serviceprovider = models.ManyToManyField(ServiceProvider, null=True, blank=True)
+	serviceprovider = models.ManyToManyField(ServiceProvider, blank=True)
 	date = models.DateTimeField(auto_now_add=True)
 	name = models.CharField(max_length=250)
 	slug = models.SlugField(max_length=250, db_index=True)
@@ -89,6 +89,18 @@ class Service(models.Model):
 
 	def get_absolute_url(self):
 		return reverse('home:detail', args=[self.id, self.slug])
+
+
+# New model for service registration. 
+class ServiceRegistration(models.Model):
+	date_created = models.DateTimeField(auto_now_add=True)
+	user = models.ForeignKey(User, on_delete=models.PROTECT)
+	servicecategory = models.ForeignKey(ServiceCategory, on_delete=models.PROTECT)
+	service = models.ManyToManyField(Service)
+
+	def __str__(self):
+		return self.user.username
+
 
 #Handle if message is not deliverd, sent a feedback to sender and inlcude staff support contact option
 class MessageInbox(models.Model):

@@ -22,3 +22,9 @@ urlpatterns = [
     path('', views.indexView, name='index'),
     path('home/', include('home.urls')),
 ]
+
+
+admin.site.site_header = "ServApp Administration"
+admin.site.site_title = "ServApp Administration Portal"
+admin.site.index_title = "Welcome to The ServApp Administration Portal"
+

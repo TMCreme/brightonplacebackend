@@ -15,10 +15,11 @@ from django.contrib import messages
 from .models import (
 	UserProfile, Dialog, Message, ServiceCategory, 
 	ServiceProvider, Service, MessageInbox, PostProject,
-	SampleServiceDisplay,ProjectBid, ServicePackage, ClientReview) 
+	SampleServiceDisplay,ProjectBid, ServicePackage, ClientReview,
+	ServiceRegistration) 
 from .forms import (
 	RegistrationForm, UserLogin, EditProfile, UserProfileForm, 
-	ServiceRegistration, MessageInboxForm, PostProjectForm,
+	ServiceRegistrationForm, MessageInboxForm, PostProjectForm,
 	SampleServiceDisplayForm, ProjectBidForm, ServicePackageForm)
 from django.utils.safestring import mark_safe
 
@@ -26,7 +27,7 @@ from myproject.settings import SECRET_KEY
 from django.contrib.auth import login, logout, authenticate
 from .serializers import (
 	UserSerializer, ServiceSerializer, ServiceCategorySerializer,
-	SampleServiceDisplaySerializer, UserProfileSerializer
+	SampleServiceDisplaySerializer, UserProfileSerializer, ServiceRegistrationSerializer
 )
 import json
 import string
@@ -172,6 +173,15 @@ def create_user(request):
 		return Response(serialized.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+class ServiceRegistrationAPIView(generics.ListCreateAPIView):
+	queryset = ServiceRegistration.objects.all()
+	serializer_class = ServiceRegistrationSerializer
+
+	def post(self, request, *args, **kwargs):
+		return self.create(request, *args, **kwargs)
+
+	def get_serializer_context(self, *args, **kwargs):
+	 return {"request":self.request}
 
 
 # Service Category REST API
@@ -231,6 +241,8 @@ def sampledisplay_by_service(request,id):
 	return Response(serializer.data)
 
 
+
+
 #Simple sign up -- thinking of including an option to be a service provider
 #In which case if user applies to be a service provider, then authentication will be deferred until approval from a SUPERUSER
 #User profile is created with virtually empty params. Then when the authentication is complete, 
@@ -283,13 +295,13 @@ def signup(request):
 		form = RegistrationForm()
 	return render(request, 'home/reg_form.html', {'form':form})
 
-def serviceregistration(request):
-	service_form = ServiceRegistration
+def serviceregistrationview(request):
+	service_form = ServiceRegistrationForm
 	serv = Service.objects.all()
 	current_user = User.objects.get(username=request.user)
 	email = current_user.email
 	if request.method == 'POST':
-		service_form = ServiceRegistration(request.POST)
+		service_form = ServiceRegistrationForm(request.POST)
 		if service_form.is_valid():
 			cd = service_form.cleaned_data
 			serv_category = cd['service_category']

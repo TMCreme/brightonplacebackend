@@ -62,7 +62,7 @@ class UserLogin(forms.ModelForm):
         fields =['username', 'password']
 
 
-class ServiceRegistration(forms.Form):
+class ServiceRegistrationForm(forms.Form):
 	catt_list = []
 	catt_dict = {}
 	serv_list = []
