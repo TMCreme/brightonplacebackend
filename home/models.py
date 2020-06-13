@@ -220,6 +220,18 @@ class ServiceRequest(models.Model):
 	def __str__(self):
 		return self.vendor.username
 
+	@property
+	def service_user_name(self):
+		return self.service_user.username
+	
+	@property
+	def vendor_name(self):
+		return self.vendor.username
+
+	@property
+	def service_name(self):
+		return self.service.name
+
 
 
 class Transaction(models.Model):
