@@ -242,6 +242,12 @@ def sampledisplay_by_service(request,id):
 	return Response(serializer.data)
 
 
+@api_view(['GET'])
+def individualservice(request, id):
+	service = Service.objects.get(id=id)
+	serialized = ServiceSerializer(service)
+	return Response(serialized.data)
+
 
 # This is the view for creating and getting all objects
 class ServiceRequestAPIView(mixins.CreateModelMixin, generics.ListAPIView):
