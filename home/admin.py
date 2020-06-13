@@ -2,7 +2,8 @@ from django.contrib import admin
 from django.contrib.auth.models import User
 from .models import (
 	UserProfile, ServiceCategory, ServiceProvider, Service, MessageInbox, ServiceRegistration,
-	PostProject, SampleServiceDisplay, ProjectBid, ServicePackage, ClientReview, UserLocation)
+	PostProject, SampleServiceDisplay, ProjectBid, ServicePackage, ClientReview, UserLocation,
+	ServiceRequest)
 #from .forms import UserProfile
 
 
@@ -54,6 +55,9 @@ class ProjectBidAdmin(admin.ModelAdmin):
 	list_display = ['bid_reference','project','description','cost','commission']
 admin.site.register(ProjectBid, ProjectBidAdmin)
 
+class ServiceRequestAdmin(admin.ModelAdmin):
+	list_display = ['date_created','vendor','service_user','service','cost','delivery_fee','total_cost','payment_made','delivered','delivery_duration']
+admin.site.register(ServiceRequest, ServiceRequestAdmin)
 
 class ServicePackageAdmin(admin.ModelAdmin):
 	list_display = ['name','serviceprovider','service','cost','delivery_timeline']

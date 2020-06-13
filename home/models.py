@@ -198,6 +198,30 @@ class ProjectBid(models.Model):
 	def get_absolute_url(self):
 		return reverse('home:projectbids', args=[self.project.id])
 
+
+class ServiceRequest(models.Model):
+	date_created = models.DateTimeField(auto_now_add=True)
+	service = models.ForeignKey(Service, on_delete=models.PROTECT)
+	# client = models.ForeignKey(User, on_delete=models.PROTECT),
+	vendor = models.ForeignKey(User, related_name="provider", on_delete=models.PROTECT)
+	service_user = models.ForeignKey(User, related_name="client_user", on_delete=models.PROTECT) # Due to django's mood-swings, I used this for clients
+	delivery = models.BooleanField(default=True)   # This is true cos we will be doing delivery for items
+	delivery_duration = models.CharField(max_length=200, null=True, blank=True)  # For vendor to let the client know when the service will be ready 
+	cost = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True) #Vendor's total charge
+	service_fee = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True) # Percentage of vendor's charge
+	delivery_fee = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)  # Delivery charge
+	total_cost = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)  # Vendor's charge + service_fee + delivery
+	client_confirmation = models.BooleanField(default=False)   # For client to confirm acceptance of fee 
+	payment_made = models.BooleanField(default=False)   #  This will check payment model if payment is made, once made, set to True and send to client to begin production
+	service_dispatched = models.BooleanField(default=False)  # For vendor to notify the client when item is en route to e delivered
+	delivered = models.BooleanField(default=False)  # For client to confirm delivery, so vendor can be paid  
+	vendor_paid = models.BooleanField(default=False)  # Set to True if money is transfered to vendor's servapp-wallet. 
+
+	def __str__(self):
+		return self.vendor.username
+
+
+
 class Transaction(models.Model):
 	client = models.ForeignKey(User, related_name='service_client', on_delete=models.CASCADE)
 	serviceprovider = models.ForeignKey(ServiceProvider, related_name='transaction_serviceprovider', on_delete=models.CASCADE)

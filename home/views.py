@@ -16,7 +16,7 @@ from .models import (
 	UserProfile, Dialog, Message, ServiceCategory, 
 	ServiceProvider, Service, MessageInbox, PostProject,
 	SampleServiceDisplay,ProjectBid, ServicePackage, ClientReview,
-	ServiceRegistration) 
+	ServiceRegistration, ServiceRequest) 
 from .forms import (
 	RegistrationForm, UserLogin, EditProfile, UserProfileForm, 
 	ServiceRegistrationForm, MessageInboxForm, PostProjectForm,
@@ -27,7 +27,8 @@ from myproject.settings import SECRET_KEY
 from django.contrib.auth import login, logout, authenticate
 from .serializers import (
 	UserSerializer, ServiceSerializer, ServiceCategorySerializer,
-	SampleServiceDisplaySerializer, UserProfileSerializer, ServiceRegistrationSerializer
+	SampleServiceDisplaySerializer, UserProfileSerializer, ServiceRegistrationSerializer,
+	ServiceRequestSerializer
 )
 import json
 import string
@@ -241,6 +242,24 @@ def sampledisplay_by_service(request,id):
 	return Response(serializer.data)
 
 
+
+# This is the view for creating and getting all objects
+class ServiceRequestAPIView(mixins.CreateModelMixin, generics.ListAPIView):
+	queryset = ServiceRequest.objects.all()
+	serializer_class = ServiceRequestSerializer
+
+	def post(self, request, *args, **kwargs):
+		return self.create(request, *args, **kwargs)
+
+	def get_serializer_context(self, *args, **kwargs):
+		return {"request":self.request}
+
+
+# Here is another view for update, retrive, destroy
+class ServiceRequestUpdateView(generics.RetrieveUpdateDestroyAPIView):
+	queryset = ServiceRequest.objects.all()
+	serializer_class = ServiceRequestSerializer
+	lookup_field = 'id'
 
 
 #Simple sign up -- thinking of including an option to be a service provider
