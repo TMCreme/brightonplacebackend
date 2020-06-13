@@ -19,6 +19,7 @@ urlpatterns = [
     path('api-service-registration/', views.ServiceRegistrationAPIView.as_view(), name='api-service-registration'),
     path('api-service-request/', views.ServiceRequestAPIView.as_view(), name='api-service-request'),
     path('api-service-request-update/<int:id>/', views.ServiceRequestUpdateView.as_view(), name='api-service-request-update'),
+    path('api-get-user-service-request/<int:id>/', views.getuserservicerequest, name='api-get-user-service-request'),
     path('search_results/', views.searchview, name='search_results'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('signup/', views.signup, name='signup'),

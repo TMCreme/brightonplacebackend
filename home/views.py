@@ -262,6 +262,16 @@ class ServiceRequestUpdateView(generics.RetrieveUpdateDestroyAPIView):
 	lookup_field = 'id'
 
 
+
+# This view collates all service request for a user - either vendor or client
+@api_view(['GET'])
+def getuserservicerequest(request, id):
+	service_requests = ServiceRequest.objects.filter(Q(vendor__id=id) | Q(service_user__id=id))
+	serializer = ServiceRequestSerializer(service_requests, many=True, context={'request':request})
+	return Response(serializer.data)
+
+
+
 #Simple sign up -- thinking of including an option to be a service provider
 #In which case if user applies to be a service provider, then authentication will be deferred until approval from a SUPERUSER
 #User profile is created with virtually empty params. Then when the authentication is complete, 
