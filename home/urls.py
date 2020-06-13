@@ -40,6 +40,7 @@ urlpatterns = [
     path('projectbid/', views.projectbidview, name='projectbid'),
     # Rest API from here apart from login at the top
     path('api-service/', views.ServiceView.as_view(), name='api-service'),
+    path('api-get-individual-service/<int:id>/', views.individualservice, name='api-get-individual-service'),
     path('api-service-category/', views.ServiceCategoryAPIView.as_view(), name='api-service-category'),
     path('api-service-by-category/<int:id>/', views.service_by_cat, name='api-service-by-category'),
     path('api-sample-display-by-service/<int:id>/', views.sampledisplay_by_service, name='saple-display-by-service'),
