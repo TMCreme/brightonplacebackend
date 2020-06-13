@@ -259,7 +259,7 @@ class ServiceRequestAPIView(mixins.CreateModelMixin, generics.ListAPIView):
 class ServiceRequestUpdateView(generics.RetrieveUpdateDestroyAPIView):
 	queryset = ServiceRequest.objects.all()
 	serializer_class = ServiceRequestSerializer
-	lookup_field = 'id'
+	lookup_field = 'pk'
 
 
 
