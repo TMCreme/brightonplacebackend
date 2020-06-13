@@ -94,6 +94,9 @@ class SampleServiceDisplaySerializer(serializers.ModelSerializer):
 
 class ServiceRequestSerializer(serializers.ModelSerializer):
 	id = serializers.ReadOnlyField()
+	service_user_name = serializers.ReadOnlyField()
+	vendor_name = serializers.ReadOnlyField()
+	service_name = serializers.ReadOnlyField()
 
 	class Meta:
 		model = ServiceRequest
