@@ -236,7 +236,7 @@ def service_by_cat(request,id):
 
 @permission_classes((IsAuthenticated,))
 @api_view(['GET', 'POST'])
-def sampledisplay_by_service(request,id):
+def vendordisplay_by_service(request,id):
 	services = UserProfile.objects.filter(user__id__in=Service.objects.get(id=id).serviceprovider.values_list('user__id',flat=True))
 	serializer = UserProfileSerializer(services, many=True, context={"request": request})
 	return Response(serializer.data)

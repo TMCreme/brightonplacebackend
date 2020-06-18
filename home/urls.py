@@ -43,7 +43,7 @@ urlpatterns = [
     path('api-get-individual-service/<int:id>/', views.individualservice, name='api-get-individual-service'),
     path('api-service-category/', views.ServiceCategoryAPIView.as_view(), name='api-service-category'),
     path('api-service-by-category/<int:id>/', views.service_by_cat, name='api-service-by-category'),
-    path('api-sample-display-by-service/<int:id>/', views.sampledisplay_by_service, name='saple-display-by-service'),
+    path('api-vendor-display-by-service/<int:id>/', views.vendordisplay_by_service, name='vendor-display-by-service'),
     #re_path('profile/(?P<pk>[0-9]+)/$', views.EditProfileView.as_view(), name='edit_profile'),
     #path('user-profile/', views.user_profile, name='user_profile'),
 ]
