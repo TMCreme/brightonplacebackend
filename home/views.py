@@ -4,6 +4,7 @@ from braces.views import LoginRequiredMixin
 from django.views import generic
 from django.contrib.auth import get_user_model
 from django.db.models import Q
+from django.dispatch import receiver 
 from django.forms.models import inlineformset_factory, modelformset_factory
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
@@ -46,7 +47,9 @@ from rest_framework.generics import CreateAPIView
 from rest_framework_jwt.settings import api_settings
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.parsers import JSONParser, MultiPartParser, FormParser
-import jwt
+import jwt 
+
+from django_rest_passwordreset.signals import reset_password_token_created
 
 jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
 jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
@@ -122,6 +125,12 @@ class LoginUserView(APIView):
               {'error': 'Invalid credentials',
               'status': 'failed'},
             )
+
+# Password Reset 
+@receiver(reset_password_token_created)
+def password_reset_token_created(sender, instance, reset_password_token, *args, **kwargs):
+	print(reset_password_token.key)
+	return Response({'status':'OK','token':reset_password_token})
 
 # REST API LOGOUT VIEW
 class LogoutAPIView(APIView):
