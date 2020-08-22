@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'rest_framework_jwt',
     'rest_auth',
+    'django_rest_passwordreset',
     'widget_tweaks',
     'crispy_forms',
     'multiselectfield',
