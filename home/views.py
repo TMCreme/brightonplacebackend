@@ -129,8 +129,8 @@ class LoginUserView(APIView):
 # Password Reset 
 @receiver(reset_password_token_created)
 def password_reset_token_created(sender, instance, reset_password_token, *args, **kwargs):
-	print(reset_password_token.key)
-	return Response({'status':'OK','token':reset_password_token})
+	# print(reset_password_token.key)
+	return Response({'status':'OK','password_reset_token':reset_password_token.key, 'email':reset_password_token.email})
 
 # REST API LOGOUT VIEW
 class LogoutAPIView(APIView):

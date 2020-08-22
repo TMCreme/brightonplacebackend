@@ -11,6 +11,7 @@ app_name = 'home'
 urlpatterns = [
     path('', views.indexView, name='index'),
     #path('', auth_views.login, {'template_name':'home/index.html'}, name='index'),
+    path('api-password-token-created/', views.password_reset_token_created, name='api-password-token-created'),
     path('api-login-user/', views.LoginUserView.as_view(), name='api-login-user'),
     path('api-logout-user/', views.LogoutAPIView.as_view(), name='api-logout-user'),
     path('api-user-chat/', views.UserChatAPIView.as_view(), name='api-user-chat'),
