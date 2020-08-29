@@ -252,6 +252,10 @@ def vendordisplay_by_service(request,id):
 	services = UserProfile.objects.filter(user__id__in=Service.objects.get(id=id).serviceprovider.values_list('user__id',flat=True))
 	# service_reg = ServiceRegistration.objects.get(user__id=id)
 	vendor_obj = []
+	try:
+		service_description = ServiceRegistration.objects.get(user__id=item.id, service__id=id).description 
+	except ServiceRegistration.DoesNotExist:
+		service_description = ""
 	for item in services:
     		vendor_obj.append({
 				"id": item.id,
@@ -271,7 +275,7 @@ def vendordisplay_by_service(request,id):
 				"occupation": item.occupation,
 				"organization": item.organization,
 				"user": item.user.id,
-				"service_description":ServiceRegistration.objects.get(user__id=item.id, service__id=id).description,
+				"service_description":service_description,
 			})
 	# serializer = UserProfileSerializer(services, many=True, context={"request": request})
 	return Response(vendor_obj)
