@@ -31,7 +31,7 @@ from .serializers import (
 	SampleServiceDisplaySerializer, UserProfileSerializer, ServiceRegistrationSerializer,
 	ServiceRequestSerializer
 )
-import json
+import json, os
 import string
 import random
 
@@ -261,7 +261,7 @@ def vendordisplay_by_service(request,id):
 			"id": item.id,
 			"username": item.user.username,
 			"email": item.user.email,
-			"profile_picture": str(item.profile_picture),
+			"profile_picture":os.path.join(settings.STATIC_URL, str(item.profile_picture)),
 			"slug": item.slug,
 			"first_name": item.first_name,
 			"last_name": item.last_name,
