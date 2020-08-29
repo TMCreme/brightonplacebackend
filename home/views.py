@@ -261,7 +261,7 @@ def vendordisplay_by_service(request,id):
 		if item.profile_picture:
     			ppic = os.path.join(settings.STATIC_URL, str(item.profile_picture))
 		else:
-    			ppic = item.profile_picture
+    			ppic = ""
 		vendor_obj.append({
 			"id": item.id,
 			"username": item.user.username,
