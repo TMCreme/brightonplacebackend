@@ -274,7 +274,7 @@ def vendordisplay_by_service(request,id):
 				# "service_description":ServiceRegistration.objects.get(user__id=item.id).description,
 			})
 	# serializer = UserProfileSerializer(services, many=True, context={"request": request})
-	return vendor_obj
+	return Response(vendor_obj)
 
 # Before displaying each vendor's page with their unique description of services rendered, 
 # This API is for vendors to add a maximum of 5 services 
