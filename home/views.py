@@ -271,7 +271,7 @@ def vendordisplay_by_service(request,id):
 				"occupation": item.occupation,
 				"organization": item.organization,
 				"user": item.user.id,
-				# "service_description":ServiceRegistration.objects.get(user__id=item.id).description,
+				"service_description":ServiceRegistration.objects.get(user__id=item.id, service__id=id).description,
 			})
 	# serializer = UserProfileSerializer(services, many=True, context={"request": request})
 	return Response(vendor_obj)
