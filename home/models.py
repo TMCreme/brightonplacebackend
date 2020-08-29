@@ -97,6 +97,7 @@ class ServiceRegistration(models.Model):
 	user = models.ForeignKey(User, on_delete=models.PROTECT)
 	servicecategory = models.ForeignKey(ServiceCategory, on_delete=models.PROTECT)
 	service = models.ManyToManyField(Service)
+	description = models.TextField(null=True, blank=True)
 
 	def __str__(self):
 		return self.user.username

@@ -236,6 +236,8 @@ class ServicebyCategoryView(generics.ListCreateAPIView):
 	def get_serializer_context(self, *args, **kwargs):
 		return {"request":self.request}
 
+
+# Service listing by category REST API
 @api_view(['GET', 'POST'])
 def service_by_cat(request,id):
 	services = Service.objects.filter(servicecategory__id=id)
@@ -243,12 +245,49 @@ def service_by_cat(request,id):
 	return Response(serializer.data)
 
 
+# Listing of Vendors according to service REST API
 @permission_classes((IsAuthenticated,))
 @api_view(['GET', 'POST'])
 def vendordisplay_by_service(request,id):
 	services = UserProfile.objects.filter(user__id__in=Service.objects.get(id=id).serviceprovider.values_list('user__id',flat=True))
-	serializer = UserProfileSerializer(services, many=True, context={"request": request})
-	return Response(serializer.data)
+	# service_reg = ServiceRegistration.objects.get(user__id=id)
+	vendor_obj = []
+	for item in services:
+    		vendor_obj.append({
+				"id": item.id,
+				"username": item.username,
+				"email": item.email,
+				"profile_picture": str(item.profile_picture),
+				"slug": item.slug,
+				"first_name": item.first_name,
+				"last_name": item.last_name,
+				"phone_number": item.phone_number,
+				"website": item.website,
+				"bio": item.bio,
+				"city": item.city,
+				"country": item.country,
+				"location_latitude": item.location_latitude,
+				"location_longitude": item.location_longitude,
+				"occupation": item.occupation,
+				"organization": item.organization,
+				"user": item.user,
+				"service_descriptioin":ServiceRegistration.objects.get(user__id=item.id).description,
+			})
+	# serializer = UserProfileSerializer(services, many=True, context={"request": request})
+	return Response(vendor_obj)
+
+# Before displaying each vendor's page with their unique description of services rendered, 
+# This API is for vendors to add a maximum of 5 services 
+class AddSampleServiceAPI(generics.ListCreateAPIView):
+    	serializer_class = SampleServiceDisplaySerializer
+
+# Vendor's Page - After showing list of vendors, 
+# This api view is for each vendor to display their sample services
+@permission_classes((IsAuthenticated,))
+@api_view(['GET','POST'])
+def addsamplaeapiview(request):
+	
+	return 
 
 
 @api_view(['GET'])
