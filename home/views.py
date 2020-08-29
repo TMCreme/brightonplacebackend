@@ -253,30 +253,30 @@ def vendordisplay_by_service(request,id):
 	# service_reg = ServiceRegistration.objects.get(user__id=id)
 	vendor_obj = []
 	for item in services:
-    		try:
-				service_description = ServiceRegistration.objects.get(user__id=item.id, service__id=id).description 
-			except ServiceRegistration.DoesNotExist:
-				service_description = ""
-    		vendor_obj.append({
-				"id": item.id,
-				"username": item.user.username,
-				"email": item.user.email,
-				"profile_picture": str(item.profile_picture),
-				"slug": item.slug,
-				"first_name": item.first_name,
-				"last_name": item.last_name,
-				"phone_number": item.phone_number,
-				"website": item.website,
-				"bio": item.bio,
-				"city": item.city,
-				"country": item.country,
-				"location_latitude": item.location_latitude,
-				"location_longitude": item.location_longitude,
-				"occupation": item.occupation,
-				"organization": item.organization,
-				"user": item.user.id,
-				"service_description":service_description,
-			})
+		try:
+			service_description = ServiceRegistration.objects.get(user__id=item.id, service__id=id).description 
+		except ServiceRegistration.DoesNotExist:
+			service_description = ""
+		vendor_obj.append({
+			"id": item.id,
+			"username": item.user.username,
+			"email": item.user.email,
+			"profile_picture": str(item.profile_picture),
+			"slug": item.slug,
+			"first_name": item.first_name,
+			"last_name": item.last_name,
+			"phone_number": item.phone_number,
+			"website": item.website,
+			"bio": item.bio,
+			"city": item.city,
+			"country": item.country,
+			"location_latitude": item.location_latitude,
+			"location_longitude": item.location_longitude,
+			"occupation": item.occupation,
+			"organization": item.organization,
+			"user": item.user.id,
+			"service_description":service_description,
+		})
 	# serializer = UserProfileSerializer(services, many=True, context={"request": request})
 	return Response(vendor_obj)
 
