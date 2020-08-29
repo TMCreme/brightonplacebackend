@@ -258,9 +258,9 @@ def vendordisplay_by_service(request,id):
 		except ServiceRegistration.DoesNotExist:
 			service_description = ""
 		if item.profile_picture:
-    		ppic = os.path.join(settings.STATIC_URL, str(item.profile_picture))
+    			ppic = os.path.join(settings.STATIC_URL, str(item.profile_picture)) 
 		else:
-    		ppic = item.profile_picture
+    			ppic = item.profile_picture
 		vendor_obj.append({
 			"id": item.id,
 			"username": item.user.username,
