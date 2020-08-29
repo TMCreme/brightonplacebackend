@@ -252,11 +252,11 @@ def vendordisplay_by_service(request,id):
 	services = UserProfile.objects.filter(user__id__in=Service.objects.get(id=id).serviceprovider.values_list('user__id',flat=True))
 	# service_reg = ServiceRegistration.objects.get(user__id=id)
 	vendor_obj = []
-	try:
-		service_description = ServiceRegistration.objects.get(user__id=item.id, service__id=id).description 
-	except ServiceRegistration.DoesNotExist:
-		service_description = ""
 	for item in services:
+    		try:
+				service_description = ServiceRegistration.objects.get(user__id=item.id, service__id=id).description 
+			except ServiceRegistration.DoesNotExist:
+				service_description = ""
     		vendor_obj.append({
 				"id": item.id,
 				"username": item.user.username,
