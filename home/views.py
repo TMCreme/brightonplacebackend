@@ -255,8 +255,8 @@ def vendordisplay_by_service(request,id):
 	for item in services:
     		vendor_obj.append({
 				"id": item.id,
-				"username": item.username,
-				"email": item.email,
+				"username": item.user.username,
+				"email": item.user.email,
 				"profile_picture": str(item.profile_picture),
 				"slug": item.slug,
 				"first_name": item.first_name,
