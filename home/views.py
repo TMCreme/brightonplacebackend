@@ -183,7 +183,7 @@ class FcmUserTokenUpdateAPIView(APIView):
 		return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-def send_chat_message(self, request, format=None):
+def send_chat_message(request, format=None):
 	sender = request.POST["sender"]
 	recipient = request.POST["recipient"]
 	registration_token = FcmUserToken.objects.get(id=recipient).fire_token
