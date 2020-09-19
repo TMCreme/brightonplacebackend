@@ -17,7 +17,7 @@ from .models import (
 	UserProfile, Dialog, Message, ServiceCategory, 
 	ServiceProvider, Service, MessageInbox, PostProject,
 	SampleServiceDisplay,ProjectBid, ServicePackage, ClientReview,
-	ServiceRegistration, ServiceRequest) 
+	ServiceRegistration, ServiceRequest, FcmUserToken) 
 from .forms import (
 	RegistrationForm, UserLogin, EditProfile, UserProfileForm, 
 	ServiceRegistrationForm, MessageInboxForm, PostProjectForm,
@@ -29,7 +29,7 @@ from django.contrib.auth import login, logout, authenticate
 from .serializers import (
 	UserSerializer, ServiceSerializer, ServiceCategorySerializer,
 	SampleServiceDisplaySerializer, UserProfileSerializer, ServiceRegistrationSerializer,
-	ServiceRequestSerializer
+	ServiceRequestSerializer, FcmUserTokenSerializer
 )
 import json, os
 import string
@@ -140,6 +140,68 @@ class LogoutAPIView(APIView):
 		print(request.user.id)
 		request.data.pop('auth_token')
 		return Response({'status':'success'})
+
+
+
+
+class FcmUserTokenAPIView(APIView):
+	def get(self, request, format=None):
+		fcmtokens = FcmUserToken.objects.all()
+		serializer = FcmUserTokenSerializer(fcmtokens, many=True)
+		return Response(serializer.data)
+	
+	def post(self, request, format=None):
+		serializer = FcmUserTokenSerializer(data=request.data)
+		if serializer.is_valid():
+			serializer.save()
+			return Response(serializer.data, status=status.HTTP_201_CREATED)
+		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+	
+class FcmUserTokenUpdateAPIView(APIView):
+	def get_object(self, pk):
+		try:
+			return FcmUserToken.objects.get(pk=pk)
+		except FcmUserToken.DoesNotExist:
+			raise Http404
+
+	def get(self, request, pk, format=None):
+		fcmusertoken = self.get_object(pk)
+		serializer = FcmUserTokenSerializer(fcmusertoken)
+		return Response(serializer.data)
+
+	def put(self, request, pk, format=None):
+		fcmusertoken = self.get_object(pk)
+		serializer = FcmUserTokenSerializer(fcmusertoken, data=request.data)
+		if serializer.is_valid():
+			serializer.save()
+			return Response(serializer.data)
+		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+	def delete(self, request, pk, format=None):
+		fcmusertoken = self.get_object(pk)
+		fcmusertoken.delete()
+		return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+def send_chat_message(self, request, format=None):
+	sender = request.POST["sender"]
+	recipient = request.POST["recipient"]
+	registration_token = FcmUserToken.objects.get(id=recipient).fire_token
+	# See documentation on defining a message payload.
+	message = messaging.Message(
+		notification=messaging.Notification(
+            title='$GOOG up 1.43% on the day',
+            body='$GOOG gained 11.80 points to close at 835.67, up 1.43% on the day.',
+        ),
+		token=registration_token,
+	)
+
+	# Send a message to the device corresponding to the provided
+	# registration token.
+	response = messaging.send(message)
+	# Response is a message ID string.
+	print('Successfully sent message:', response)
+	return response 
 
 
 

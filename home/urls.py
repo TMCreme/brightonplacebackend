@@ -45,6 +45,9 @@ urlpatterns = [
     path('api-service-category/', views.ServiceCategoryAPIView.as_view(), name='api-service-category'),
     path('api-service-by-category/<int:id>/', views.service_by_cat, name='api-service-by-category'),
     path('api-vendor-display-by-service/<int:id>/', views.vendordisplay_by_service, name='vendor-display-by-service'),
+    path('api-fcm-token-list/', views.FcmUserTokenAPIView.as_view(), name='api-fcm-token-list'),
+    path('api-fcm-token-update/<int:pk>/', views.FcmUserTokenUpdateAPIView.as_view(), name='api-fcm-token-update'),
+    path('api-send-chat-push-notification/', views.send_chat_message, name='api-send-chat-push-notification'),
     #re_path('profile/(?P<pk>[0-9]+)/$', views.EditProfileView.as_view(), name='edit_profile'),
     #path('user-profile/', views.user_profile, name='user_profile'),
 ]

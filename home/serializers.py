@@ -3,7 +3,7 @@ from rest_framework import serializers
 from .models import (
 	ServiceCategory, Service, ServiceProvider, ServicePackage, SampleServiceDisplay,
 	Message, MessageInbox, UserLocation, UserProfile, ServiceRegistration,
-	ServiceRequest
+	ServiceRequest, FcmUserToken
 )
 from drf_extra_fields.fields import Base64ImageField
 
@@ -36,6 +36,12 @@ class UserProfileSerializer(serializers.ModelSerializer):
 		fields = '__all__'
 
 
+class FcmUserTokenSerializer(serializers.ModelSerializer):
+	id = serializers.ReadOnlyField()
+
+	class Meta:
+		model = FcmUserToken
+		fields = "__all__"
 
 class ServiceCategorySerializer(serializers.ModelSerializer):
     id = serializers.ReadOnlyField()

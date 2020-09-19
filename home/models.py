@@ -37,6 +37,14 @@ def create_profile(sender, **kwargs):
 post_save.connect(create_profile, sender=User)
 
 
+class FcmUserToken(models.Model):
+	user = models.ForeignKey(User, on_delete=models.CASCADE)
+	fire_token = models.CharField(max_length=500)
+
+# def create_fcmtoken(sender, **kwargs):
+# 	if kwargs['created']:
+# 		fcm_usertoken = FcmUserToken.objects.create(user)
+
 class UserLocation(models.Model):
 	user = models.ForeignKey(User, on_delete=models.CASCADE)
 	region = models.CharField(max_length=250, null=True, blank=True)
