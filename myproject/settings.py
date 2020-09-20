@@ -153,7 +153,7 @@ config = {
       "storageBucket": "chatprojectonny.appspot.com",
       "messagingSenderId": "348714289467"
     }
-cred = credentials.Certificate(os.path.join(BASE_DIR, 'turnkey-point-245416-710d95832389.json'))
+cred = credentials.Certificate(os.path.join(BASE_DIR, 'chatprojectonny-fe2213322ec3.json'))
 initialize_app(cred, config)
 
 # Static files (CSS, JavaScript, Images)
