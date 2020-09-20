@@ -184,8 +184,8 @@ class FcmUserTokenUpdateAPIView(APIView):
 
 @api_view(['POST'])
 def send_chat_message(request, format=None):
-	sender = request.POST["sender"]
-	recipient = request.POST["recipient"]
+	sender = request.data.get("sender")
+	recipient = request.data.get("recipient")
 	registration_token = FcmUserToken.objects.get(id=recipient).fire_token
 	# See documentation on defining a message payload.
 	message = messaging.Message(
