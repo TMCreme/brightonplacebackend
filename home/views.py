@@ -186,7 +186,10 @@ class FcmUserTokenUpdateAPIView(APIView):
 def send_chat_message(request, format=None):
 	sender = request.data.get("sender")
 	recipient = request.data.get("recipient")
-	registration_token = FcmUserToken.objects.get(id=recipient).fire_token
+	try:
+		registration_token = FcmUserToken.objects.get(user__id=recipient).fire_token
+	except FcmUserToken.DoesNotExist:
+		print("User Token does not exist")
 	# See documentation on defining a message payload.
 	message = messaging.Message(
 		notification=messaging.Notification(
