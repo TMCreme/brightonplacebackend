@@ -182,7 +182,7 @@ class FcmUserTokenUpdateAPIView(APIView):
 		fcmusertoken.delete()
 		return Response(status=status.HTTP_204_NO_CONTENT)
 
-
+@api_view(['POST'])
 def send_chat_message(request, format=None):
 	sender = request.POST["sender"]
 	recipient = request.POST["recipient"]
