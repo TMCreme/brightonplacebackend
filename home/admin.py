@@ -71,7 +71,7 @@ admin.site.register(ClientReview, ClientReviewAdmin)
 
 admin.site.register(UserLocation)
 
-
+admin.site.register(FcmUserToken)
 
 
 

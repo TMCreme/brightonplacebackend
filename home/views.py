@@ -201,7 +201,7 @@ def send_chat_message(request, format=None):
 	response = messaging.send(message)
 	# Response is a message ID string.
 	print('Successfully sent message:', response)
-	return response 
+	return Response({"response":response})
 
 
 
