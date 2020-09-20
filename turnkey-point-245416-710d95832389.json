@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "turnkey-point-245416",
+  "private_key_id": "710d958323896e52d26dd4329a521e580f0253b9",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDQYYUIrHYSBfTM\nbY5c0XNNXi6piAKChfEo+ahx3cuNnVxmEunIESkL/UgT2gjWuFIoVxAmfD36Pb4V\ncz/POqXyOICJ3RKLhmdsHX4rvsvRL3/OcslcEw1wcOmkRA8u9E22FEmiHzBEBuPo\n0B1N+OTlmUpFK1XTvWO3t5GQrVmXUyaEqnsnFOG/ZpQ8kYPYrtXEQeO0M5qCWa9H\nYgSX+2u6lQyy3pSpV4Dt+BoTCrdyWzLwQOfffXolStgtuCPJRRrJONcuXw+tORI8\nAMxidNg0vjbLJZQusxARvOGYKTiN33YNgeCUrFUaxXtO8mtv+u1BkY7jqxDjqj8T\nquc0VdFrAgMBAAECggEAX6HxyPpFMZ5UK6G37TcewIoRxjIqXLaV5+Uz/hX5PiPS\n7PGPIwdlHCCAfMPavJhY9DSIr/DjDL5bR0LeLP/QeuqdayfvQ+NKAZ9DcVYd+gHf\nmOKrMLt5tnnLcFzfzv/FzmNfK60+nGnBHO6uFEO+4PRJ1pa9y/AmHIF9p7U24bAu\nd9HzfGKzRmTTBZRcJyeraZOQVe9Dlt47WHLNryVnbebLOCoUkBSA4PblkqvVS38X\nSSWAWkAaUD1NtVnVVhdOarndwp5LaG7kmX1DTkb7Nx26cRnPz+a184eCoGJEZ/lb\ni1shDYZO8p9rhUDc/fxsAaDM0qwMbio2eGKjCQv5KQKBgQDsBdgrUH6qIidZbTEG\ndOcOQ59xgO5VIhVmL3EJw1tdDZyxVxjYBof+k181l2JsQ2dFkpaIlic6GCNeekc/\nDkHajgmTv7WvQXfKO7z3lJvT/dTCzqUsUpD631eO+axOL0OCUi0iHI0PN+mk/qVz\nbd8FqKvNzzznMyegdHjWwWMg9wKBgQDiBLqsQMqiRVkXtIujBe8qZ2PCfk+vQgBc\nrmFutNWFhwhU93qgFB1sd4VsEx/WesdE8ETpOcqDJy1U7P21zq1h+G9ksOfz75Hh\naKjWvXgb5rEPSdOHlausGFAK7YBA+M4oLGiu1imaF0Tz615A5uLABuSgeg7+uu5r\ns3gRUeOqLQKBgQCZwNDqnpx1LpydqAEo6JzgcPL8WPZppTN1hvBHYOkyvDxYVpnL\nmK2dDNoYKk8mod4zt2OzBMX3FWRtFpE1JY+G1cKtalTsH2Tu7G2Uh03gEto4Ma/u\nKLdjhn0emc1CfY2n5uqZ7ymBQXZGUtDrWibQI+oPv7I4Ft34rAdQN1jhTwKBgQDQ\n6pIqWpFzQSrDEK3p+LhDt+Gsi9jYJOf0w3NoQ1sC2/hFoaQFh9JSyn/XkC3jsQW0\noWrxMewRIwtx7sXtYac+YceFiUg+YPm1I2q9Y9E76RdNDG6saxqOLsL99t6QL+tP\nkw0IXwmBV3TzCmLLFyANY9G8zFZD+0Ia539acxk/2QKBgA4gSol1a7l7Dlj3PEfr\n2+bl4TR3rpx9aQwrYcV8ZwE0qgOAvlvPq+ANDyE7ZGqKWDqF4mDuAkZzzObsnbvl\nF5gOT9bL+j6DrUzAG6uaZAPJiz7PKT4ZbaxxQl1bi0EZvHdSt8aalF1yZ/Cg+Jjw\n+uAr6v1fKKbZCH7sQT6n7NSw\n-----END PRIVATE KEY-----\n",
+  "client_email": "servapp@turnkey-point-245416.iam.gserviceaccount.com",
+  "client_id": "108101703390244820154",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/servapp%40turnkey-point-245416.iam.gserviceaccount.com"
+}

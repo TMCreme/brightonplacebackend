@@ -143,7 +143,7 @@ USE_L10N = True
 USE_TZ = True
 
 
-from firebase_admin import messaging, firestore, initialize_app
+from firebase_admin import credentials, initialize_app
 
 config = {
       "apiKey": "AIzaSyDjSJmRlPe8m09XdRUqzFrEKEKKdwNu3hE",
@@ -153,8 +153,8 @@ config = {
       "storageBucket": "chatprojectonny.appspot.com",
       "messagingSenderId": "348714289467"
     }
-
-initialize_app(config)
+cred = credentials.Certificate(os.path.join(BASE_DIR, 'turnkey-point-245416-710d95832389.json'))
+initialize_app(cred, config)
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
