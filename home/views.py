@@ -186,6 +186,7 @@ class FcmUserTokenUpdateAPIView(APIView):
 def send_chat_message(request, format=None):
 	sender = request.data.get("sender")
 	recipient = request.data.get("recipient")
+	message = request.data.get("newmessage")
 	try:
 		registration_token = FcmUserToken.objects.get(user__id=recipient).fire_token
 	except FcmUserToken.DoesNotExist:
@@ -193,8 +194,8 @@ def send_chat_message(request, format=None):
 	# See documentation on defining a message payload.
 	message = messaging.Message(
 		notification=messaging.Notification(
-            title='$GOOG up 1.43% on the day',
-            body='$GOOG gained 11.80 points to close at 835.67, up 1.43% on the day.',
+            title='Message',
+            body=message,
         ),
 		token=registration_token,
 	)
