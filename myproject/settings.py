@@ -143,6 +143,19 @@ USE_L10N = True
 USE_TZ = True
 
 
+from firebase_admin import messaging, firestore, initialize_app
+
+config = {
+      apiKey: "AIzaSyDjSJmRlPe8m09XdRUqzFrEKEKKdwNu3hE",
+      authDomain: "chatprojectonny.firebaseapp.com",
+      databaseURL: "https://chatprojectonny.firebaseio.com",
+      projectId: "chatprojectonny",
+      storageBucket: "chatprojectonny.appspot.com",
+      messagingSenderId: "348714289467"
+    }
+
+initialize_app(config)
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
