@@ -102,8 +102,8 @@ class Service(models.Model):
 # New model for service registration. 
 class ServiceRegistration(models.Model):
 	date_created = models.DateTimeField(auto_now_add=True)
-	user = models.ForeignKey(User, on_delete=models.PROTECT)
-	servicecategory = models.ForeignKey(ServiceCategory, on_delete=models.PROTECT)
+	user = models.ForeignKey(User, on_delete=models.SET_NULL)
+	servicecategory = models.ForeignKey(ServiceCategory, on_delete=models.SET_NULL)
 	service = models.ManyToManyField(Service)
 	description = models.TextField(null=True, blank=True)
 
@@ -210,10 +210,10 @@ class ProjectBid(models.Model):
 
 class ServiceRequest(models.Model):
 	date_created = models.DateTimeField(auto_now_add=True)
-	service = models.ForeignKey(Service, on_delete=models.PROTECT)
+	service = models.ForeignKey(Service, on_delete=models.SET_NULL)
 	# client = models.ForeignKey(User, on_delete=models.PROTECT),
-	vendor = models.ForeignKey(User, related_name="provider", on_delete=models.PROTECT)
-	service_user = models.ForeignKey(User, related_name="client_user", on_delete=models.PROTECT) # Due to django's mood-swings, I used this for clients
+	vendor = models.ForeignKey(User, related_name="provider", on_delete=models.SET_NULL)
+	service_user = models.ForeignKey(User, related_name="client_user", on_delete=models.SET_NULL) # Due to django's mood-swings, I used this for clients
 	delivery = models.BooleanField(default=True)   # This is true cos we will be doing delivery for items
 	delivery_duration = models.CharField(max_length=200, null=True, blank=True)  # For vendor to let the client know when the service will be ready 
 	cost = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True) #Vendor's total charge
