@@ -195,23 +195,26 @@ def send_chat_message(request, format=None):
 	message = request.data.get("newmessage")
 	try:
 		registration_token = FcmUserToken.objects.get(user__id=recipient).fire_token
+		# See documentation on defining a message payload.
+		message = messaging.Message(
+			notification=messaging.Notification(
+				title=sendername,
+				body=message,
+			),
+			token=registration_token,
+		)
+		# Send a message to the device corresponding to the provided
+		# registration token.
+		response = messaging.send(message)
+		# Response is a message ID string.
+		print('Successfully sent message:', response)
+		return Response({"response":response})
 	except FcmUserToken.DoesNotExist:
 		print("User Token does not exist")
-	# See documentation on defining a message payload.
-	message = messaging.Message(
-		notification=messaging.Notification(
-            title=sendername,
-            body=message,
-        ),
-		token=registration_token,
-	)
-
-	# Send a message to the device corresponding to the provided
-	# registration token.
-	response = messaging.send(message)
-	# Response is a message ID string.
-	print('Successfully sent message:', response)
-	return Response({"response":response})
+		return Response({"response":"User Token does not exist"})
+	
+	
+	
 
 
 
