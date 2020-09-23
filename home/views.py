@@ -202,7 +202,6 @@ def send_chat_message(request, format=None):
 		notification=messaging.Notification(
             title=sendername,
             body=message,
-			senderId=sender,
         ),
 		token=registration_token,
 	)
