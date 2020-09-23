@@ -139,8 +139,10 @@ class LogoutAPIView(APIView):
 	def post(self,request):
 		print(request.user.id)
 		request.data.pop('auth_token')
-		if FcmUserToken.objects.get(user__id=request.user.id):
+		try:
 			FcmUserToken.objects.get(user__id=request.user.id).delete()
+		except FcmUserToken.DoesNotExist:
+			pass
 		return Response({'status':'success'})
 
 
