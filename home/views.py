@@ -140,7 +140,7 @@ class LogoutAPIView(APIView):
 		print(request.user.id)
 		request.data.pop('auth_token')
 		try:
-			FcmUserToken.objects.get(user__id=request.user.id).delete()
+			FcmUserToken.objects.filter(user__id=request.user.id).delete()
 		except FcmUserToken.DoesNotExist:
 			pass
 		return Response({'status':'success'})
@@ -193,8 +193,10 @@ def send_chat_message(request, format=None):
 	sendername = request.data.get("sendername")
 	recipient = request.data.get("recipient")
 	message = request.data.get("newmessage")
+	print(recipient)
 	try:
 		registration_token = FcmUserToken.objects.get(user__id=recipient).fire_token
+		print(registration_token)
 		# See documentation on defining a message payload.
 		message = messaging.Message(
 			notification=messaging.Notification(
