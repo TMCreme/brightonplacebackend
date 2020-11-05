@@ -320,11 +320,14 @@ class VendorSampleView(generics.ListCreateAPIView):
 
 	def get_queryset(self):
 		user_id =  self.request.query_params.get('id')
-		queryset = VendorSampleSerializer.objects.filter(user__id=user_id)
+		queryset = VendorSample.objects.filter(user__id=user_id)
 		return queryset
 
 	def post(self, request, *args, **kwargs):
 		return self.create(request, *args, **kwargs)
+
+	def get_serializer_context(self, *args, **kwargs):
+		return {"request":self.request}
 
 
 
