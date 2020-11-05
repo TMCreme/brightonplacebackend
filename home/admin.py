@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from .models import (
 	UserProfile, ServiceCategory, ServiceProvider, Service, MessageInbox, ServiceRegistration,
 	PostProject, SampleServiceDisplay, ProjectBid, ServicePackage, ClientReview, UserLocation,
-	ServiceRequest, FcmUserToken)
+	ServiceRequest, FcmUserToken, VendorSample)
 #from .forms import UserProfile
 
 
@@ -73,6 +73,7 @@ admin.site.register(UserLocation)
 
 admin.site.register(FcmUserToken)
 
+admin.site.register(VendorSample)
 
 
 

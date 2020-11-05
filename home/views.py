@@ -17,7 +17,7 @@ from .models import (
 	UserProfile, Dialog, Message, ServiceCategory, 
 	ServiceProvider, Service, MessageInbox, PostProject,
 	SampleServiceDisplay,ProjectBid, ServicePackage, ClientReview,
-	ServiceRegistration, ServiceRequest, FcmUserToken) 
+	ServiceRegistration, ServiceRequest, FcmUserToken, VendorSample) 
 from .forms import (
 	RegistrationForm, UserLogin, EditProfile, UserProfileForm, 
 	ServiceRegistrationForm, MessageInboxForm, PostProjectForm,
@@ -29,7 +29,7 @@ from django.contrib.auth import login, logout, authenticate
 from .serializers import (
 	UserSerializer, ServiceSerializer, ServiceCategorySerializer,
 	SampleServiceDisplaySerializer, UserProfileSerializer, ServiceRegistrationSerializer,
-	ServiceRequestSerializer, FcmUserTokenSerializer
+	ServiceRequestSerializer, FcmUserTokenSerializer, VendorSampleSerializer
 )
 import json, os
 import string
@@ -312,6 +312,20 @@ class ServicebyCategoryView(generics.ListCreateAPIView):
 
 	def get_serializer_context(self, *args, **kwargs):
 		return {"request":self.request}
+
+
+# Vendors to be able to add samples of work and it will be displayed on their dashboard for clients
+class VendorSampleView(generics.ListCreateAPIView):
+	serializer_class = VendorSampleSerializer
+
+	def get_queryset(self):
+		user_id =  sef.request.params.get('id')
+		queryset = VendorSampleSerializer.objects.filter(user__id=user_id)
+		return queryset
+
+	def post(self, request, *args, **kwargs):
+		return self.create(request, *args, **kwargs)
+
 
 
 # Service listing by category REST API

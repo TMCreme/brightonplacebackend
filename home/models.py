@@ -208,6 +208,17 @@ class ProjectBid(models.Model):
 		return reverse('home:projectbids', args=[self.project.id])
 
 
+class VendorSample(models.Model):
+	user = models.ForeignKey(User, on_delete=models.CASCADE)
+	description = models.TextField()
+	image = models.ImageField(blank=True, null=True)
+
+	def __str__(self):
+		return self.user.username 
+
+	
+
+
 class ServiceRequest(models.Model):
 	date_created = models.DateTimeField(auto_now_add=True)
 	service = models.ForeignKey(Service, on_delete=models.CASCADE)
