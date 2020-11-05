@@ -319,7 +319,7 @@ class VendorSampleView(generics.ListCreateAPIView):
 	serializer_class = VendorSampleSerializer
 
 	def get_queryset(self):
-		user_id =  sef.request.params.get('id')
+		user_id =  self.request.params.get('id')
 		queryset = VendorSampleSerializer.objects.filter(user__id=user_id)
 		return queryset
 
