@@ -86,6 +86,7 @@ class UserLocationSerializer(serializers.ModelSerializer):
 
 class VendorSampleSerializer(serializers.ModelSerializer):
 	id = serializers.ReadOnlyField()
+	image = Base64ImageField(required=False)
 	class Meta:
 		model = VendorSample 
 		fields = '__all__' 
