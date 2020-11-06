@@ -316,6 +316,7 @@ class ServicebyCategoryView(generics.ListCreateAPIView):
 
 # Vendors to be able to add samples of work and it will be displayed on their dashboard for clients
 class VendorSampleView(generics.ListCreateAPIView):
+	parser_classes = (JSONParser, MultiPartParser, FormParser,)
 	serializer_class = VendorSampleSerializer
 
 	def get_queryset(self):
