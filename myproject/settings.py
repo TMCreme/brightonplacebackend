@@ -32,7 +32,7 @@ SECRET_KEY = '%kn*hytw!ta295w_5a*kwr)$vlk0)26y9nmw9%)-06tnr@1d&)'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['brightonplace.herokuapp.com']
+ALLOWED_HOSTS = ['brightonplace.herokuapp.com', '127.0.0.1']
 
 LOGIN_REDIRECT_URL = '/home/edit_profile/'
 LOGIN_URL = '/home/'
@@ -106,6 +106,9 @@ DATABASES = {
         'PASSWORD': 'fada0d25e38be339657e6f917772b6e4daee4527a69dfa0bd8d37dc956c1153b',
         'HOST': 'ec2-54-225-92-1.compute-1.amazonaws.com',
         'PORT': '5432',
+        # 'TEST': {
+        #     'NAME': 'mytestdatabase',
+        # },
     }
 }
 
